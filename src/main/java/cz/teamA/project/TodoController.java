@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 @RequiredArgsConstructor
 public class TodoController {
 
-    private final CityRepository cityRepository;
-    private final TodoService todoService;
+//    private final CityRepository cityRepository;
+//    private final TodoService todoService;
 //
 //
 //    //@ResponseBody
