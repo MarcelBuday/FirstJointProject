@@ -1,27 +1,31 @@
 package cz.teamA.project;
 
-import cz.teamA.project.consoleUI.ConsoleUI;
+import cz.teamA.project.service.APIService;
+import cz.teamA.project.view.ConsoleUI;
 import cz.teamA.project.model.City;
-import cz.teamA.project.repository.CityRepository;
 import cz.teamA.project.service.CityService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.io.IOException;
+
 @SpringBootApplication
 public class Main {
-    static CityService cityService;
+    private static  CityService cityService;
+    private static APIService apiService;
 
-    public Main(CityService cityService) {
+    public Main(CityService cityService,APIService apiService) {
         this.cityService = cityService;
+       this.apiService = apiService;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         final ConsoleUI consoleUI = new ConsoleUI();
         SpringApplication.run(Main.class, args);
-        consoleUI.welcome();
+
         cityService.InsertCity(new City("mesto","zeme"));
-
-
+        //test připojení k API AccuWeather
+       // apiService.getLocation("Brno");
     }
 
 }

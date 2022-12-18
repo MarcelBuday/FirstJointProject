@@ -1,7 +1,6 @@
-package cz.teamA.project.consoleUI;
+package cz.teamA.project.view;
 
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Service;
 
 
 @NoArgsConstructor
