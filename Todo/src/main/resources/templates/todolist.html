@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<a href="todo/add">Add new todo</a>
+
+<h1>TODOS FOR TODAY:</h1>
+
+<table>
+  <tr>
+    <td>ID</td>
+    <td>ACTION</td>
+    <td>DONE</td>
+    <td>URGENT</td>
+  </tr>
+  <th:block th:each="todo : ${todos}">
+
+
+    <tr th:if="${ isActive == 'true'}">
+      <!--/* This is column with ID! */-->
+      <td th:if="${ todo.isDone() == true}" th:text="${todo.getId()}"></td>
+
+      <!--/* This is column with ACTION! */-->
+      <td th:if="${ todo.isDone() == true}" th:text="${todo.getTitle()}"></td>
+
+      <!--/* This is column with DONE! */-->
+      <td th:if="${ todo.isDone() == true}" th:text="${todo.isDone()}"></td>
+
+      <!--/* This is column with URGENT! */-->
+      <td th:if="${ todo.isDone() == true}" th:text="${todo.isUrgent()}"></td>
+
+      <!--/* This is column with delete! */-->
+      <td><a th:href="@{'/delete/'+${todo.getId()}}">delete</a></td>
+
+      <!--/* This is column with edit! */-->
+      <td><a th:href="@{'/update/'+${todo.getId()}}">update</a></td>
+
+    </tr>
+
+    <tr th:if="${ isActive != 'true'}">
+      <!--/* This is column with ID! */-->
+      <td th:text="${todo.getId()}"></td>
+
+      <!--/* This is column with ACTION! */-->
+      <td th:text="${todo.getTitle()}"></td>
+
+      <!--/* This is column with DONE! */-->
+      <td th:text="${todo.isDone()}"></td>
+
+      <!--/* This is column with URGENT! */-->
+      <td th:text="${todo.isUrgent()}"></td>
+
+      <!--/* This is column with delete! */-->
+      <td><a th:href="@{'/delete/'+${todo.getId()}}">delete</a></td>
+
+      <!--/* This is column with edit! */-->
+      <td><a th:href="@{'/update/'+${todo.getId()}}">update</a></td>
+
+    </tr>
+
+
+  </th:block>
+</table>
+
+</body>
+</html>

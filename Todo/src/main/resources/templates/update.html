@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<form
+        action="#"
+        method="post"
+>
+
+  <label for="title">Text</label>
+  <input
+          type="text"
+          name="title"
+          id="title"
+  />
+  <br>
+
+  <label for="done">Done</label>
+  <input
+          type="checkbox"
+          name="done"
+          id="done"
+  />
+  <br>
+
+  <label for="urgent">Urgent</label>
+  <input
+          type="checkbox"
+          name="urgent"
+          id="urgent"
+  />
+  <br>
+
+  <button th:href="'http://localhost:8080'" id="save" type="submit">Encode</button>
+</form>
+
+</body>
+</html>
