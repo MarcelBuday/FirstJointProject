@@ -1,20 +1,18 @@
 package cz.teamA.project.service;
 
-import cz.teamA.project.service.apiservice.AccuWeatherAPIService;
+import cz.teamA.project.service.api.AccuWeatherAPI;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 
 @Service
 public class APIService {
-private final AccuWeatherAPIService accuWeatherAPIService;
+private final AccuWeatherAPI accuWeatherAPI;
 
-public APIService(AccuWeatherAPIService accuWeatherAPIService){
-    this.accuWeatherAPIService = accuWeatherAPIService;
+public APIService(AccuWeatherAPI accuWeatherAPI){
+    this.accuWeatherAPI = accuWeatherAPI;
 }
 
 public void getLocationInfo(String city){
-    accuWeatherAPIService.getLocationInfo(city);
+    accuWeatherAPI.getLocationInfo(city);
 }
 
 }

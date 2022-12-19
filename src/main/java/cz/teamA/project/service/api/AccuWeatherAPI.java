@@ -1,8 +1,5 @@
-package cz.teamA.project.service.apiservice;
+package cz.teamA.project.service.api;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import cz.teamA.project.model.City;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -13,7 +10,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 @Service
-public class AccuWeatherAPIService {
+public class AccuWeatherAPI {
 
     public void getLocationInfo(String city) {
         String urlString = "http://dataservice.accuweather.com/locations/v1/cities/search?apikey=mA7XoDQGB5OTqyq0R2zHL87GkBynWE2c&q=" + city;
