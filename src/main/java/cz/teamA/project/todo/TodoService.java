@@ -1,4 +1,4 @@
-package cz.teamA.project;
+package cz.teamA.project.todo;
 
 public interface TodoService {
     void deleteTodo(Long id);

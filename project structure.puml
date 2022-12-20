@@ -11,7 +11,6 @@ ConsoleUI -> User: App menu
 User ->o Controller: Chooses option
 Controller ->o Service: Calls method
 Service o<->o Database: Data
-
 Service o<->o WeatherAPI: Data
 Service ->o Controller: Returns data
 Controller ->o ConsoleUI: Passes data

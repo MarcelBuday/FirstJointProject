@@ -11,8 +11,9 @@ public APIService(AccuWeatherAPI accuWeatherAPI){
     this.accuWeatherAPI = accuWeatherAPI;
 }
 
-public void getLocationInfo(String city){
-    accuWeatherAPI.getLocationInfo(city);
+public void getInfo(String city){
+  //  accuWeatherAPI.getLocationInfo(city);
+   // accuWeatherAPI.getWeatherInfo(123291,true);
 }
 
 }
