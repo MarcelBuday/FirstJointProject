@@ -12,8 +12,8 @@ public APIService(AccuWeatherAPI accuWeatherAPI){
 }
 
 public void getInfo(String city){
-  //  accuWeatherAPI.getLocationInfo(city);
-   // accuWeatherAPI.getWeatherInfo(123291,true);
+   // accuWeatherAPI.getLocationInfo(city);
+    accuWeatherAPI.getWeatherInfo(123291);
 }
 
 }
