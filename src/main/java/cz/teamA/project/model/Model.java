@@ -1,5 +1,6 @@
 package cz.teamA.project.model;
 
+import cz.teamA.project.jpamodel.Location;
 import cz.teamA.project.repository.CityRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,8 @@ public class Model {
     public void getWeatherInfoByLocation(String location) {
         weatherAPIService.getWeatherInfoByLocation(location);
     }
-//test
-//    public void InsertCity(City city){
-//        cityRepository.save(city);
-//    }
+
+    public void InsertLocation(Location location){
+        cityRepository.save(location);
+    }
 }

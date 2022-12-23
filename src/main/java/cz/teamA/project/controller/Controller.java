@@ -14,11 +14,11 @@ public class Controller {
     }
 
     public void appStart() {
-        consoleUI.welcome();
+        consoleUI.showWelcomeMessage();
 
 
         //test of database
-        //model.InsertCity(new City("mesto", "zeme"));
+        //model.InsertCity(new Location("mesto", "zeme"));
 
 
         // test of connection to API AccuWeather

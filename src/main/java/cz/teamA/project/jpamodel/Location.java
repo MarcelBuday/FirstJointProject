@@ -12,7 +12,7 @@ import lombok.NonNull;
 @Data
 @NoArgsConstructor
 
-public class City {
+public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Generuje to unikatne ID do DB
     @Id // toto je potrebne
     private long id;
@@ -24,14 +24,14 @@ public class City {
     @NonNull
     private String countryName;
 
-    public City(@NonNull String cityName, @NonNull String countryName) {
+    public Location(@NonNull String cityName, @NonNull String countryName) {
         this.cityName = cityName;
         this.countryName = countryName;
         this.region = "N/A";
         this.coordinates = "N/A";
     }
 
-    public City(@NonNull String cityName, @NonNull String countryName, String region,String coordinates) {
+    public Location(@NonNull String cityName, @NonNull String countryName, String region, String coordinates) {
         this.coordinates = coordinates;
         this.region = region;
         this.cityName = cityName;

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class ConsoleUI {
     private final String welcomeMessage = "Welcome to WeatherLady app!";
 
-    public void welcome() {
+    public void showWelcomeMessage() {
         System.out.println(welcomeMessage);
     }
 }
