@@ -1,4 +1,4 @@
-package cz.teamA.project.model;
+package cz.teamA.project.jpamodel;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
