@@ -8,8 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Main {
-    private static Model model;
-    private static WeatherAPIService weatherApiService;
     private static Controller controller;
 
     public Main(Controller controller) {
