@@ -1,8 +1,6 @@
 package cz.teamA.project;
 
 import cz.teamA.project.controller.Controller;
-import cz.teamA.project.model.Model;
-import cz.teamA.project.model.WeatherAPIService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
