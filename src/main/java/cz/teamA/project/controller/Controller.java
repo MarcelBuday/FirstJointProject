@@ -21,22 +21,37 @@ public class Controller {
         consoleUI.showWelcomeMessage();
         consoleUI.showWhatCanBeDone();
         String whatShouldBeDone = scanner.nextLine();
+
+        label:
         while (true) {
-            if (whatShouldBeDone.equals("1")) {
+            switch (whatShouldBeDone) {
+                case "1":
+                    consoleUI.cityName();
+                    String city = scanner.nextLine();
+                    consoleUI.countryName();
+                    String country = scanner.nextLine();
+                    consoleUI.latitude();
+                    double latitude = Double.parseDouble(scanner.nextLine());
+                    consoleUI.longitude();
+                    double longitude = Double.parseDouble(scanner.nextLine());
+                    consoleUI.region();
+                    String region = scanner.nextLine();
+                    break label;
+                case "2":
 
 
-                break;
-            } else if (whatShouldBeDone.equals("2")) {
+                    break label;
+                case "3":
 
-                break;
-            } else if (whatShouldBeDone.equals("3")) {
-
-                break;
-            } else {
-                consoleUI.unknownChoice();
-                consoleUI.showWhatCanBeDone();
-                whatShouldBeDone = scanner.nextLine();
+                    break label;
+                default:
+                    consoleUI.unknownChoice();
+                    consoleUI.showWhatCanBeDone();
+                    whatShouldBeDone = scanner.nextLine();
+                    break;
             }
+
+
         }
 
         //test of database

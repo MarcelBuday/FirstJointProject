@@ -8,14 +8,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import java.util.UUID;
+
 @Entity
 @Data
 @NoArgsConstructor
 
 public class Location {
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Generuje to unikatne ID do DB
+    @GeneratedValue(strategy = GenerationType.UUID) // Generuje to unikatne ID do DB
     @Id // toto je potrebne
-    private long id;
+    private UUID uuid;
 
     private String coordinates;
     private String region;
