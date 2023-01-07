@@ -19,22 +19,18 @@ public class Location {
     @Id // toto je potrebne
     private UUID uuid;
 
-    private String coordinates;
+    private double longitude;
+    private double latitude;
     private String region;
     @NonNull
     private String cityName;
     @NonNull
     private String countryName;
 
-    public Location(@NonNull String cityName, @NonNull String countryName) {
-        this.cityName = cityName;
-        this.countryName = countryName;
-        this.region = "N/A";
-        this.coordinates = "N/A";
-    }
 
-    public Location(@NonNull String cityName, @NonNull String countryName, String region, String coordinates) {
-        this.coordinates = coordinates;
+    public Location(@NonNull String cityName, @NonNull String countryName, String region, double longitude, double latitude) {
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.region = region;
         this.cityName = cityName;
         this.countryName = countryName;

@@ -1,5 +1,6 @@
 package cz.teamA.project.model;
 
+import cz.teamA.project.jpamodel.Coordinates;
 import cz.teamA.project.jpamodel.Location;
 import cz.teamA.project.repository.LocationRepository;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,10 @@ public class Model {
         weatherAPIService.getWeatherInfoByLocation(location);
     }
 
-    public void InsertLocation(Location location){
+    public void insertLocation(String cityName, String countryName, String region, double longitude, double latitude){
+        Location location = new Location(cityName,countryName,region,longitude, latitude);
         locationRepository.save(location);
+
     }
+
 }
