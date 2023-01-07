@@ -1,4 +1,4 @@
-package cz.teamA.project.model;
+package cz.teamA.project.jpamodel;
 
 public class Coordinates {
     private double longitude;

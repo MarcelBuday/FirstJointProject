@@ -1,27 +1,20 @@
 package cz.teamA.project;
 
-import cz.teamA.project.consoleUI.ConsoleUI;
-import cz.teamA.project.model.City;
-import cz.teamA.project.repository.CityRepository;
-import cz.teamA.project.service.CityService;
+import cz.teamA.project.controller.Controller;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Main {
-    static CityService cityService;
+    private static Controller controller;
 
-    public Main(CityService cityService) {
-        this.cityService = cityService;
+    public Main(Controller controller) {
+        Main.controller = controller;
     }
 
     public static void main(String[] args) {
-        final ConsoleUI consoleUI = new ConsoleUI();
         SpringApplication.run(Main.class, args);
-        consoleUI.welcome();
-        cityService.InsertCity(new City("mesto","zeme"));
-
-
+        controller.appStart();
     }
 
 }
