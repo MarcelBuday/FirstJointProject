@@ -1,6 +1,5 @@
 package cz.teamA.project.todo;
 
-import cz.teamA.project.repository.CityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 
