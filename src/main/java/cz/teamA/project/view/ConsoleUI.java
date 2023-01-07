@@ -1,7 +1,10 @@
 package cz.teamA.project.view;
 
+import cz.teamA.project.jpamodel.Location;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 
 @NoArgsConstructor
@@ -48,6 +51,11 @@ public class ConsoleUI {
 
     public void region() {
         System.out.println("Enter region or press Enter");
+    }
+
+    public void allLocations(List <Location> allLocations) {
+       allLocations.forEach(location -> System.out.println(location.toString()));
+
     }
 }
 

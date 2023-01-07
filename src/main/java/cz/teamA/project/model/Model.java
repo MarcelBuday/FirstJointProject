@@ -5,6 +5,8 @@ import cz.teamA.project.jpamodel.Location;
 import cz.teamA.project.repository.LocationRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class Model {
     private final LocationRepository locationRepository;
@@ -25,6 +27,10 @@ public class Model {
         Location location = new Location(cityName,countryName,region,longitude, latitude);
         locationRepository.save(location);
 
+    }
+
+    public List<Location> selectAllLocation() {
+        return locationRepository.findAll();
     }
 
 }

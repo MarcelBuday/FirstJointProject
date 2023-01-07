@@ -20,17 +20,18 @@ public class Controller {
 
     public void appStart() {
         consoleUI.showWelcomeMessage();
-        consoleUI.showWhatCanBeDone();
-        String whatShouldBeDone = scanner.nextLine();
+
 
         label:
         while (true) {
+            consoleUI.showWhatCanBeDone();
+            String whatShouldBeDone = scanner.nextLine();
             switch (whatShouldBeDone) {
                 case "1":
                     consoleUI.cityName();
                     String city = scanner.nextLine();
-                    while(city.equals("")){
-                        System.out.println("City can not be empty. Add city.");
+                    while(city.equals("") /*|| city.matches("^[^0-9]+$")*/){
+                        System.out.println("Unknown city, try again:");
                         city = scanner.nextLine();
                     }
                     consoleUI.countryName();
@@ -40,21 +41,31 @@ public class Controller {
                         country = scanner.nextLine();
                     }
                     consoleUI.latitude();
-                    double latitude = Double.parseDouble(scanner.nextLine());
+
+                    String trylatitude = scanner.nextLine();
+                    double latitude = 0d;
+                    if (!trylatitude.isEmpty()){
+                        latitude = Double.parseDouble(trylatitude);
+                    }
                     consoleUI.longitude();
-                    double longitude = Double.parseDouble(scanner.nextLine());
+                    String trylongitude = scanner.nextLine();
+                    double longitude = 0d;
+                    if (!trylongitude.isEmpty()){
+                        longitude = Double.parseDouble(trylongitude);
+                    }
+
                     Coordinates coordinates = new Coordinates(longitude,latitude);
                     consoleUI.region();
                     String region = scanner.nextLine();
                     model.insertLocation(city,country,region,longitude,latitude);
-                    break label;
+                    break;
                 case "2":
+                    consoleUI.allLocations(model.selectAllLocation());
 
-
-                    break label;
+                    break;
                 case "3":
 
-                    break label;
+                    break;
                 default:
                     consoleUI.unknownChoice();
                     consoleUI.showWhatCanBeDone();

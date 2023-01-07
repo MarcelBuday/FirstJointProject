@@ -36,7 +36,13 @@ public class Location {
         this.countryName = countryName;
     }
 
-    //    id - optional: UUID format
+    @Override
+    public String toString() {
+        return cityName + " " + countryName + " " + region + " " + longitude + " " + latitude + "\n";
+    }
+}
+
+//    id - optional: UUID format
 //    longitude and latitude according to geographical values ​​(latitude: -90 -> S, 90 -> N,
 //    longitude: -180 -> W, 180 -> E)
 //    city name - cannot be empty
@@ -44,4 +50,4 @@ public class Location {
 //    Country name - cannot be empty
 //    If incorrect data are entered, the user should be notified via an appropriate message.
 
-}
+
