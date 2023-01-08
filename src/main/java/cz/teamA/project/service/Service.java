@@ -67,7 +67,7 @@ public class Service {
     public void getWeatherData() {
         List<Location> locations = selectAllLocation();
         System.out.println("Select location");
-        if (!locations.isEmpty()){
+        if (!locations.isEmpty()) {
             for (int i = 0; i < locations.size(); i++) {
                 System.out.println((i + 1) + " " + locations.get(i));
             }
@@ -83,6 +83,7 @@ public class Service {
                 System.out.println("Wrong format");
             }
             System.out.println(date);
+//            getLocationInfo(locations.get(Integer.parseInt(s)-1).getCityName());
         } else {
             System.out.println("No location known");
         }
@@ -90,4 +91,7 @@ public class Service {
 
     }
 
+    public void getLocationInfo(String city) {
+        weatherAPIService.getLocationInfo(city);
+    }
 }

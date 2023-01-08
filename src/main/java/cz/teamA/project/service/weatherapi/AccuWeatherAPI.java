@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import cz.teamA.project.jpamodel.Location;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -12,7 +13,9 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -27,17 +30,24 @@ public class AccuWeatherAPI {
         gson = gsonBuilder.create();
     }
 
-    public void getLocationInfo(String city) {
+    public List<Location> getLocationInfo(String city) {
         String urlString = "http://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + API_KEY + "&q=" + city;
         try {
             HttpRequest request = HttpRequest.newBuilder(new URI(urlString)).GET().build();
             HttpClient client = HttpClient.newHttpClient();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             JsonArray jsonArray = gson.fromJson(response.body(), JsonArray.class);
-            Map<String, Integer> locationInfo = new HashMap<>();
+            List<Location> locations = new ArrayList<>();
             for (JsonElement e : jsonArray) {
-                locationInfo.put(e.getAsJsonObject().getAsJsonObject("AdministrativeArea").get("LocalizedName").getAsString(), e.getAsJsonObject().get("Key").getAsInt());
+                String region = e.getAsJsonObject().getAsJsonObject("AdministrativeArea").get("LocalizedName").getAsString();
+                double longitude = e.getAsJsonObject().getAsJsonObject("GeoPosition").get("Longitude").getAsDouble();
+                double latitude = e.getAsJsonObject().getAsJsonObject("GeoPosition").get("Latitude").getAsDouble();
+                int key = e.getAsJsonObject().get("Key").getAsInt();
+                String country = e.getAsJsonObject().getAsJsonObject("Country").get("LocalizedName").getAsString();
+                Location location = new Location(city,country,region,longitude,latitude,key);
+                locations.add(location);
             }
+            return locations;
         } catch (IOException | URISyntaxException | InterruptedException ex) {
             throw new RuntimeException(ex);
         }

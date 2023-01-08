@@ -1,7 +1,10 @@
 package cz.teamA.project.service;
 
+import cz.teamA.project.jpamodel.Location;
 import cz.teamA.project.service.weatherapi.AccuWeatherAPI;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class WeatherAPIService {
@@ -11,8 +14,9 @@ public class WeatherAPIService {
         this.accuWeatherAPI = accuWeatherAPI;
     }
 
-    public void getWeatherInfoByLocation(String location) {
-        // accuWeatherAPI.getLocationInfo(location);
+    public void getLocationInfo(String location) {
+        List<Location> locations =accuWeatherAPI.getLocationInfo(location);
+        locations.forEach(location1 -> System.out.println(location1));
         //accuWeatherAPI.getWeatherInfo(123291);
     }
 
