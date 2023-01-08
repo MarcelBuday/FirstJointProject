@@ -56,5 +56,6 @@ public class ConsoleUI {
        allLocations.forEach(location -> System.out.println(location.toString()));
 
     }
+
 }
 

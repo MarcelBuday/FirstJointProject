@@ -4,6 +4,9 @@ import cz.teamA.project.jpamodel.Coordinates;
 import cz.teamA.project.jpamodel.Location;
 import cz.teamA.project.repository.LocationRepository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -58,8 +61,34 @@ public class Service {
         locationService.insertLocation(city, country, region, longitude, latitude);
     }
 
-    public List<Location> selectAllLocation(){
+    public List<Location> selectAllLocation() {
         return locationService.selectAllLocation();
+    }
+
+    public void getWeatherData() {
+        List<Location> locations = selectAllLocation();
+        System.out.println("Select location");
+        if (!locations.isEmpty()){
+            for (int i = 0; i < locations.size(); i++) {
+                System.out.println((i + 1) + " " + locations.get(i));
+            }
+            String s = scanner.nextLine();
+            System.out.println("Select date in format 2001-12-01");
+            String s1 = scanner.nextLine();
+            LocalDate date;
+            try {
+                date = LocalDate.parse(s1);
+            } catch (DateTimeParseException e) {
+                date = LocalDate.now();
+                date = date.plusDays(1);
+                System.out.println("Wrong format");
+            }
+            System.out.println(date);
+        } else {
+            System.out.println("No location known");
+        }
+
+
     }
 
 }
