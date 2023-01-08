@@ -1,4 +1,4 @@
-package cz.teamA.project.model.weatherapi;
+package cz.teamA.project.service.weatherapi;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

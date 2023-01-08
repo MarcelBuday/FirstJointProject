@@ -13,7 +13,7 @@ public class TodoController {
 //
 //    //@ResponseBody
 //    @GetMapping({"/todo", "/"})
-//    public String list(@RequestParam(required = false) String isActive, Model model) {
+//    public String list(@RequestParam(required = false) String isActive, Service model) {
 //
 //        model.addAttribute("isActive", isActive);
 //        model.addAttribute("todos", cityRepository.findAll());

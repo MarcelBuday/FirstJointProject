@@ -1,6 +1,6 @@
-package cz.teamA.project.model;
+package cz.teamA.project.service;
 
-import cz.teamA.project.model.weatherapi.AccuWeatherAPI;
+import cz.teamA.project.service.weatherapi.AccuWeatherAPI;
 import org.springframework.stereotype.Service;
 
 @Service

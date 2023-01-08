@@ -1,6 +1,5 @@
-package cz.teamA.project.model;
+package cz.teamA.project.service;
 
-import cz.teamA.project.jpamodel.Coordinates;
 import cz.teamA.project.jpamodel.Location;
 import cz.teamA.project.repository.LocationRepository;
 import org.springframework.stereotype.Service;
@@ -8,19 +7,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class Model {
+public class LocationService {
     private final LocationRepository locationRepository;
-    private final WeatherAPIService weatherAPIService;
 
-
-    public Model(LocationRepository locationRepository, WeatherAPIService weatherAPIService) {
+    public LocationService(LocationRepository locationRepository) {
         this.locationRepository = locationRepository;
-        this.weatherAPIService = weatherAPIService;
-
-    }
-
-    public void getWeatherInfoByLocation(String location) {
-        weatherAPIService.getWeatherInfoByLocation(location);
     }
 
     public void insertLocation(String cityName, String countryName, String region, double longitude, double latitude){
@@ -32,5 +23,4 @@ public class Model {
     public List<Location> selectAllLocation() {
         return locationRepository.findAll();
     }
-
 }
