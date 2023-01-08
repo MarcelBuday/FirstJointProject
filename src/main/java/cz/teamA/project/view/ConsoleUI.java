@@ -17,7 +17,6 @@ public class ConsoleUI {
     public Object latitude;
     private String enterCityName;
 
-
     public void showWelcomeMessage() {
         System.out.println(WELCOME_MESSAGE);
     }

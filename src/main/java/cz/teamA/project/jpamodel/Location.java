@@ -26,14 +26,16 @@ public class Location {
     private String cityName;
     @NonNull
     private String countryName;
+    private int accuWeatherKey;
 
 
-    public Location(@NonNull String cityName, @NonNull String countryName, String region, double longitude, double latitude) {
+    public Location(@NonNull String cityName, @NonNull String countryName, String region, double longitude, double latitude, int accuWeatherKey) {
         this.longitude = longitude;
         this.latitude = latitude;
         this.region = region;
         this.cityName = cityName;
         this.countryName = countryName;
+        this.accuWeatherKey = accuWeatherKey;
     }
 
     @Override

@@ -15,7 +15,7 @@ public class LocationService {
     }
 
     public void insertLocation(String cityName, String countryName, String region, double longitude, double latitude){
-        Location location = new Location(cityName,countryName,region,longitude, latitude);
+        Location location = new Location(cityName,countryName,region,longitude, latitude,0);
         locationRepository.save(location);
 
     }
