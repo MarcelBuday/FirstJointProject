@@ -1,11 +1,8 @@
 package cz.teamA.project.service;
 
-import cz.teamA.project.jpamodel.Coordinates;
 import cz.teamA.project.jpamodel.Location;
-import cz.teamA.project.repository.LocationRepository;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
@@ -15,11 +12,13 @@ public class Service {
     private final LocationService locationService;
     private final WeatherAPIService weatherAPIService;
     private final Scanner scanner;
+    private final WeatherInfoService weatherInfoService;
 
 
-    public Service(LocationService locationService, WeatherAPIService weatherAPIService) {
+    public Service(LocationService locationService, WeatherAPIService weatherAPIService, WeatherInfoService weatherInfoService) {
         this.locationService = locationService;
         this.weatherAPIService = weatherAPIService;
+        this.weatherInfoService = weatherInfoService;
         this.scanner = new Scanner(System.in);
 
 

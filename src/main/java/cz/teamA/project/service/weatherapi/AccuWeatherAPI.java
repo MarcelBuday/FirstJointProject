@@ -19,7 +19,7 @@ import java.util.Map;
 public class AccuWeatherAPI {
     private GsonBuilder gsonBuilder;
     private Gson gson;
-    private final String API_KEY = "mA7XoDQGB5OTqyq0R2zHL87GkBynWE2c";
+    private final String API_KEY = System.getenv("API_KEY");
 
     public AccuWeatherAPI() {
         gsonBuilder = new GsonBuilder();
