@@ -14,23 +14,30 @@ public class WeatherInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id // toto je potrebne
     private long id;
-    private double temperature;
-    private double pressure;
-    private double windDirection;
+    private double temperatureMin;
+    private double temperatureMax;
+    private String windDirection;
     private double windSpeed;
-    private double humidity;
+
     @ManyToOne
     private Location location;
     private LocalDate date;
 
-    public WeatherInfo(double temperature, double pressure, double windDirection, double windSpeed,
-                       double humidity, Location location, LocalDate date) {
-        this.temperature = temperature;
-        this.pressure = pressure;
+    public WeatherInfo(double temperatureMin, double temperatureMax, String windDirection, double windSpeed,
+                       Location location, LocalDate date) {
+        this.temperatureMin = temperatureMin;
+        this.temperatureMax = temperatureMax;
         this.windDirection = windDirection;
         this.windSpeed = windSpeed;
-        this.humidity = humidity;
         this.location = location;
+        this.date = date;
+    }
+
+    public WeatherInfo(double temperatureMin, double temperatureMax, String windDirection, double windSpeed, LocalDate date) {
+        this.temperatureMin = temperatureMin;
+        this.temperatureMax = temperatureMax;
+        this.windDirection = windDirection;
+        this.windSpeed = windSpeed;
         this.date = date;
     }
 }

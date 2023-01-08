@@ -20,4 +20,8 @@ public class WeatherAPIService {
         //accuWeatherAPI.getWeatherInfo(123291);
     }
 
+    public void getWeatherInfo() {
+//        accuWeatherAPI.getWeatherInfo(0).forEach(d-> System.out.println(d));
+    }
+
 }
