@@ -1,16 +1,16 @@
 package cz.teamA.project.service;
 
 import cz.teamA.project.jpamodel.Location;
-import cz.teamA.project.service.weatherapi.AccuWeatherAPI;
+import cz.teamA.project.service.api.AccuWeatherAPI;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class WeatherAPIService {
+public class APIService {
     private final AccuWeatherAPI accuWeatherAPI;
 
-    public WeatherAPIService(AccuWeatherAPI accuWeatherAPI) {
+    public APIService(AccuWeatherAPI accuWeatherAPI) {
         this.accuWeatherAPI = accuWeatherAPI;
     }
 

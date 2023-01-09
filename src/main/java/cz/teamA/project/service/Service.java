@@ -10,14 +10,14 @@ import java.util.Scanner;
 @org.springframework.stereotype.Service
 public class Service {
     private final LocationService locationService;
-    private final WeatherAPIService weatherAPIService;
+    private final APIService APIService;
     private final Scanner scanner;
     private final WeatherInfoService weatherInfoService;
 
 
-    public Service(LocationService locationService, WeatherAPIService weatherAPIService, WeatherInfoService weatherInfoService) {
+    public Service(LocationService locationService, APIService APIService, WeatherInfoService weatherInfoService) {
         this.locationService = locationService;
-        this.weatherAPIService = weatherAPIService;
+        this.APIService = APIService;
         this.weatherInfoService = weatherInfoService;
         this.scanner = new Scanner(System.in);
 
@@ -25,7 +25,7 @@ public class Service {
     }
 
 //    public void getWeatherInfoByLocation(String location) {
-//        weatherAPIService.getWeatherInfoByLocation(location);
+//        APIService.getWeatherInfoByLocation(location);
 //    }
 
     public void addLocation() {
@@ -93,10 +93,10 @@ public class Service {
     }
 
     public void getLocationInfo(String city) {
-        weatherAPIService.getLocationInfo(city);
+        APIService.getLocationInfo(city);
     }
 
     public void getWeatherInfo(){
-        weatherAPIService.getWeatherInfo();
+        APIService.getWeatherInfo();
     }
 }

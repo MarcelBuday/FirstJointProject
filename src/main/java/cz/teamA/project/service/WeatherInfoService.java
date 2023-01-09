@@ -1,13 +1,13 @@
 package cz.teamA.project.service;
 
-import cz.teamA.project.repository.WeatherRepository;
+import cz.teamA.project.repository.WeatherInfoRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class WeatherInfoService  {
-    private final WeatherRepository weatherRepository;
+    private final WeatherInfoRepository weatherInfoRepository;
 
-    public WeatherInfoService(WeatherRepository weatherRepository) {
-        this.weatherRepository = weatherRepository;
+    public WeatherInfoService(WeatherInfoRepository weatherInfoRepository) {
+        this.weatherInfoRepository = weatherInfoRepository;
     }
 }
