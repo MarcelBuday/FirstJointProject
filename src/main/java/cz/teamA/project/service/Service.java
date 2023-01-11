@@ -73,16 +73,46 @@ public class Service {
                 System.out.println((i + 1) + " " + locations.get(i));
             }
             String s = scanner.nextLine();
-            System.out.println("Select date in format 2001-12-01");
+            System.out.println("Select date: ");
+            for (int i = 0; i < 5; i++) {
+                System.out.println((i + 1) + " = " + LocalDate.now().plusDays(i));
+            }
             String s1 = scanner.nextLine();
             LocalDate date;
-            try {
-                date = LocalDate.parse(s1);
-            } catch (DateTimeParseException e) {
-                date = LocalDate.now();
-                date = date.plusDays(1);
-                System.out.println("Wrong format");
+
+            label:
+            while (true) {
+                switch (s1) {
+                    case "1":
+                        date = LocalDate.now();
+                        break label;
+                    case "2":
+                        date = LocalDate.now().plusDays(1);
+                        break label;
+                    case "3":
+                        date = LocalDate.now().plusDays(2);
+                        break label;
+                    case "4":
+                        date = LocalDate.now().plusDays(3);
+                        break label;
+                    case "5":
+                        date = LocalDate.now().plusDays(4);
+                        break label;
+                    default:
+                        System.out.println("Unknown Choice - enter 1 or 2 or 3 or 4 or 5");
+                        s1 = scanner.nextLine();
+                        break;
+
+                }
             }
+//            LocalDate date;
+//            try {
+//                date = LocalDate.parse(s1);
+//            } catch (DateTimeParseException e) {
+//                date = LocalDate.now();
+//                date = date.plusDays(1);
+//                System.out.println("Wrong format");
+//            }
 
             final List<Location> locationInfo = APIService.getLocationInfo(locations.get(Integer.
                     parseInt(s) - 1).getCityName());
