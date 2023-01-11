@@ -20,6 +20,11 @@ public class LocationService {
 
     }
 
+    public void insertLocation(Location location) {
+        locationRepository.save(location);
+
+    }
+
     public List<Location> selectAllLocation() {
         return locationRepository.findAll();
     }
