@@ -1,6 +1,7 @@
 package cz.teamA.project.service;
 
 import cz.teamA.project.jpamodel.Location;
+import cz.teamA.project.jpamodel.WeatherInfo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -64,8 +65,8 @@ public class Service {
         return locationService.selectAllLocation();
     }
 
-    public void getWeatherData() {
-        List<Location> locations = selectAllLocation();
+    public List<WeatherInfo> getWeatherData() {
+        List<Location> locations = locationService.selectAllLocation();
         System.out.println("Select location");
         if (!locations.isEmpty()) {
             for (int i = 0; i < locations.size(); i++) {
@@ -82,18 +83,30 @@ public class Service {
                 date = date.plusDays(1);
                 System.out.println("Wrong format");
             }
-            System.out.println(date);
-//            getLocationInfo(locations.get(Integer.parseInt(s)-1).getCityName());
+
+            final List<Location> locationInfo = APIService.getLocationInfo(locations.get(Integer.
+                    parseInt(s) - 1).getCityName());
+
+            if (locationInfo.size() > 1) {
+                System.out.println("Select location, more locations were found");
+                for (int i = 0; i < locationInfo.size(); i++) {
+                    System.out.println(i + 1 + " " + locationInfo.get(i));
+                }
+                s = scanner.nextLine();
+                return APIService.getWeatherInfo(locationInfo.get(Integer.parseInt(s) - 1).getAccuWeatherKey());
+            } else if (locationInfo.size() == 1) {
+                return APIService.getWeatherInfo(locationInfo.get(0).getAccuWeatherKey());
+            } else {
+                System.out.println("No location known");
+            }
+
 
         } else {
             System.out.println("No location known");
         }
-
+        return null;
 
     }
 
-    public void getLocationInfo(String city) {
-        APIService.getLocationInfo(city);
-    }
 
 }

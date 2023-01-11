@@ -1,6 +1,7 @@
 package cz.teamA.project.view;
 
 import cz.teamA.project.jpamodel.Location;
+import cz.teamA.project.jpamodel.WeatherInfo;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -53,9 +54,11 @@ public class ConsoleUI {
     }
 
     public void allLocations(List <Location> allLocations) {
-       allLocations.forEach(location -> System.out.println(location.toString()));
+       allLocations.forEach(location -> System.out.println(location));
 
     }
-
+public void weatherInfo(List<WeatherInfo> weatherInfo){
+    weatherInfo.forEach(System.out::println);
+    }
 }
 

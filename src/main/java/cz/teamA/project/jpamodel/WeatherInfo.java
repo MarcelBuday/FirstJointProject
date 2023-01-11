@@ -40,4 +40,16 @@ public class WeatherInfo {
         this.windSpeed = windSpeed;
         this.date = date;
     }
+
+    @Override
+    public String toString() {
+        return "WeatherInfo{" +
+                "temperatureMin=" + temperatureMin +
+                ", temperatureMax=" + temperatureMax +
+                ", windDirection='" + windDirection + '\'' +
+                ", windSpeed=" + windSpeed +
+                ", location=" + location +
+                ", date=" + date +
+                '}';
+    }
 }

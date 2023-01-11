@@ -34,7 +34,7 @@ public class Controller {
                     consoleUI.allLocations(service.selectAllLocation());
                     break;
                 case "3":
-                    service.getWeatherData();
+                    consoleUI.weatherInfo(service.getWeatherData());
                     break;
                 default:
                     consoleUI.unknownChoice();
