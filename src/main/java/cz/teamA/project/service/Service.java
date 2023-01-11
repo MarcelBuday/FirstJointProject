@@ -84,7 +84,7 @@ public class Service {
             }
             System.out.println(date);
 //            getLocationInfo(locations.get(Integer.parseInt(s)-1).getCityName());
-            getWeatherInfo();
+
         } else {
             System.out.println("No location known");
         }
@@ -96,7 +96,4 @@ public class Service {
         APIService.getLocationInfo(city);
     }
 
-    public void getWeatherInfo(){
-        APIService.getWeatherInfo();
-    }
 }

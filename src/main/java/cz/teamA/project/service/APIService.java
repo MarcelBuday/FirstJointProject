@@ -1,6 +1,7 @@
 package cz.teamA.project.service;
 
 import cz.teamA.project.jpamodel.Location;
+import cz.teamA.project.jpamodel.WeatherInfo;
 import cz.teamA.project.service.api.AccuWeatherAPI;
 import org.springframework.stereotype.Service;
 
@@ -14,14 +15,12 @@ public class APIService {
         this.accuWeatherAPI = accuWeatherAPI;
     }
 
-    public void getLocationInfo(String location) {
-        List<Location> locations =accuWeatherAPI.getLocationInfo(location);
-        locations.forEach(location1 -> System.out.println(location1));
-        //accuWeatherAPI.getWeatherInfo(123291);
+    public List<Location> getLocationInfo(String location) {
+        return accuWeatherAPI.getLocationInfo(location);
     }
 
-    public void getWeatherInfo() {
-//        accuWeatherAPI.getWeatherInfo(0).forEach(d-> System.out.println(d));
+    public List<WeatherInfo> getWeatherInfo(int key) {
+        return accuWeatherAPI.getWeatherInfo(key);
     }
 
 }

@@ -56,7 +56,6 @@ public class AccuWeatherAPI {
             HttpRequest request = HttpRequest.newBuilder(new URI(urlString)).GET().build();
             HttpClient client = HttpClient.newHttpClient();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.statusCode());
             JsonObject jsonObject = gson.fromJson(response.body(), JsonObject.class);
             List<WeatherInfo> weatherInfos = new ArrayList<>();
             JsonArray dailyForecasts = jsonObject.get("DailyForecasts").getAsJsonArray();
@@ -70,7 +69,6 @@ public class AccuWeatherAPI {
                         .getAsJsonObject("Maximum")
                         .get("Value")
                         .getAsDouble();
-//               double humidity = e.getAsJsonObject().get("RelativeHumidity").getAsDouble();
                 String windDirection = e.getAsJsonObject().getAsJsonObject("Day")
                         .getAsJsonObject("Wind")
                         .getAsJsonObject("Direction")
