@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+//TODO napojit zbylé API
+//vypocet prumeru
 public class APIService {
     private final AccuWeatherAPI accuWeatherAPI;
 

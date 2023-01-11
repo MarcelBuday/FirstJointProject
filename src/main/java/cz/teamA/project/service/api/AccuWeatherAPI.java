@@ -49,7 +49,9 @@ public class AccuWeatherAPI {
             throw new RuntimeException(ex);
         }
     }
-
+//TODO UPDATE METODY
+    //API KEY vkládat přes proměnnou
+    // použít key z parametrů
     public List<WeatherInfo> getWeatherInfo(int key) {
         String urlString = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/124930?apikey=mA7XoDQGB5OTqyq0R2zHL87GkBynWE2c&details=true&metric=true";
         try {

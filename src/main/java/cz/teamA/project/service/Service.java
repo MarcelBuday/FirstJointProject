@@ -107,6 +107,7 @@ public class Service {
             String s1 = scanner.nextLine();
             LocalDate date;
 
+            //TODO switch neplní žádnou funkci z hlediska vybírání dat o počasí, pouze nastavuje datum.
             label:
             while (true) {
                 switch (s1) {
