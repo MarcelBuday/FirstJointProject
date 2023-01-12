@@ -43,6 +43,10 @@ public class Location {
     public String toString() {
         return cityName + " " + countryName + " " + region + " " + longitude + " " + latitude + "\n";
     }
+
+    public String toCSV() {
+        return  cityName + "," + countryName + "," + region + "," + longitude + "," + latitude + "," + accuWeatherKey + "\n";
+    }
 }
 
 //    id - optional: UUID format

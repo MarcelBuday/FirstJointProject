@@ -3,24 +3,26 @@ package cz.teamA.project.service;
 import cz.teamA.project.jpamodel.Location;
 import cz.teamA.project.jpamodel.WeatherInfo;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 @org.springframework.stereotype.Service
-public class Service {
+public class Service<T> {
     private final LocationService locationService;
     private final APIService APIService;
     private final Scanner scanner;
     private final WeatherInfoService weatherInfoService;
+    private final FileService fileService;
 
 
-    public Service(LocationService locationService, APIService APIService, WeatherInfoService weatherInfoService) {
+    public Service(LocationService locationService, APIService APIService, WeatherInfoService weatherInfoService, FileService fileService) {
         this.locationService = locationService;
         this.APIService = APIService;
         this.weatherInfoService = weatherInfoService;
+        this.fileService = fileService;
         this.scanner = new Scanner(System.in);
 
 
@@ -164,6 +166,14 @@ public class Service {
         }
         return null;
 
+    }
+
+    public void updateData(List<T> data){
+            fileService.updateData(data);
+    }
+
+    public void getData(Class c){
+        fileService.getData(c);
     }
 
 

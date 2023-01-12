@@ -52,4 +52,8 @@ public class WeatherInfo {
                 ", date=" + date +
                 '}';
     }
+
+    public String toCSV() {
+        return temperatureMin + "," + temperatureMax + "," + windDirection + "," + windSpeed + "," + date + "," + location + "\n";
+    }
 }

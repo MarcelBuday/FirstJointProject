@@ -1,9 +1,12 @@
 package cz.teamA.project.controller;
 
 import cz.teamA.project.jpamodel.Coordinates;
+import cz.teamA.project.jpamodel.Location;
 import cz.teamA.project.service.Service;
 import cz.teamA.project.view.ConsoleUI;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
 
 @org.springframework.stereotype.Controller
@@ -18,7 +21,7 @@ public class Controller {
         this.service = service;
     }
 
-    public void appStart() {
+    public void appStart() throws IOException, InvocationTargetException, IllegalAccessException {
         consoleUI.showWelcomeMessage();
 
 
@@ -35,6 +38,12 @@ public class Controller {
                     break;
                 case "3":
                     consoleUI.weatherInfo(service.getWeatherData());
+                    break;
+                case "t":
+                   service.updateData(service.selectAllLocation());
+                    break;
+                case "l":
+                    service.getData(Location.class);
                     break;
                 default:
                     consoleUI.unknownChoice();
