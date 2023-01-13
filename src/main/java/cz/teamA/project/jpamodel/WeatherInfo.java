@@ -3,11 +3,13 @@ package cz.teamA.project.jpamodel;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Entity
 @Data
+@Setter
 @NoArgsConstructor
 
 public class WeatherInfo {
@@ -51,9 +53,5 @@ public class WeatherInfo {
                 ", location=" + location +
                 ", date=" + date +
                 '}';
-    }
-
-    public String toCSV() {
-        return temperatureMin + "," + temperatureMax + "," + windDirection + "," + windSpeed + "," + date + "," + location + "\n";
     }
 }

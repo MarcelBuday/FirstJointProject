@@ -1,97 +1,75 @@
 package cz.teamA.project.service;
 
-import cz.teamA.project.jpamodel.Location;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 
 import static java.io.File.separator;
 
+
 @Service
 public class FileService<T> {
-
-    private boolean dataLoaded = false;
     private final File locationFile;
     private final File weatherInfoFile;
+    private final Gson gson;
 
     public FileService() {
+        this.gson = new GsonBuilder().setLenient().setPrettyPrinting().create();
         String repository = System.getProperty("user.dir") + "\\src\\main\\java\\cz\\teamA\\project\\repository";
         repository = !separator.equals("\\") ? repository.replaceAll(Matcher.quoteReplacement("\\"), separator) : repository;
-        this.locationFile = new File(repository, "locations.txt");
-        this.weatherInfoFile = new File(repository, "weatherInfo.txt");
+        this.locationFile = new File(repository, "locations.json");
+        this.weatherInfoFile = new File(repository, "weatherInfo.json");
     }
 
 
-    public void updateData(List<T> data) {
+    public void updateDataInFile(List<T> data) {
         File tempFile = fileSwitcher((Class<T>) data.get(0).getClass());
-        Method method;
         try {
             tempFile.createNewFile();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        try {
-            method = data.get(0).getClass().getMethod("toCSV");
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
         data.forEach(d -> {
             try {
-                Files.write(tempFile.toPath(), method.invoke(d).toString().getBytes(), StandardOpenOption.APPEND);
-            } catch (IOException | NullPointerException | InvocationTargetException | IllegalAccessException e) {
-
+                Files.write(tempFile.toPath(), gson.toJson(d).getBytes(), StandardOpenOption.APPEND);
+            } catch (NullPointerException | IOException ignored) {
             }
         });
     }
 
-    public List<T> getData(Class c) {
+    public List<T> getDataFromFile(Class<T> c) {
         File tempFile = fileSwitcher(c);
         String data;
         if (tempFile.exists()) {
             try {
                 data = Files.readString(tempFile.toPath());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+                JsonReader jsonReader = new JsonReader(new StringReader(data));
+                jsonReader.setLenient(true);
+                List<T> list = new ArrayList<>();
+
+                while (jsonReader.hasNext()) {
+                    list.add(gson.fromJson(jsonReader, c));
+                }
+
+                return list;
+            } catch (IOException ignored) {
             }
-//            Constructor[] constructors = c.getConstructors();
-//            try {
-//                Constructor constructor = c.getConstructor();
-//                System.out.println(constructor.getParameterCount());
-//            } catch (NoSuchMethodException e) {
-//                throw new RuntimeException(e);
-//            }
-//
-//            String[] dataSplitByLine = data.split("\n");
-//            List<Location> locations = new ArrayList<>();
-//            for (String s : dataSplitByLine) {
-//                String[] split = s.split(",");
-//                try {
-//                    locations.add((Location) constructors[0].newInstance(split[0],split[1],split[2],split[3],split[4],split[5]));
-//                } catch (InstantiationException e) {
-//                    throw new RuntimeException(e);
-//                } catch (IllegalAccessException e) {
-//                    throw new RuntimeException(e);
-//                } catch (InvocationTargetException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-            // System.out.println(locations);
         }
         return null;
     }
 
 
-    private File fileSwitcher(Class c) {
+    private File fileSwitcher(Class<T> c) {
         switch (c.getSimpleName()) {
             case "Location" -> {
                 return locationFile;

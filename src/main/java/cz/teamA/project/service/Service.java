@@ -3,8 +3,6 @@ package cz.teamA.project.service;
 import cz.teamA.project.jpamodel.Location;
 import cz.teamA.project.jpamodel.WeatherInfo;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -169,11 +167,11 @@ public class Service<T> {
     }
 
     public void updateData(List<T> data){
-            fileService.updateData(data);
+            fileService.updateDataInFile(data);
     }
 
     public void getData(Class c){
-        fileService.getData(c);
+        fileService.getDataFromFile(c);
     }
 
 

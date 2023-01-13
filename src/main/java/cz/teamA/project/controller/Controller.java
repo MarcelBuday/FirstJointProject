@@ -39,16 +39,13 @@ public class Controller {
                 case "3":
                     consoleUI.weatherInfo(service.getWeatherData());
                     break;
-                case "t":
-                   service.updateData(service.selectAllLocation());
-                    break;
-                case "l":
-                    service.getData(Location.class);
+                    //development choice
+                case "test":
+                 //  service.updateData(service.selectAllLocation());
+                 //   service.getData(Location.class);
                     break;
                 default:
                     consoleUI.unknownChoice();
-                    consoleUI.showWhatCanBeDone();
-                    whatShouldBeDone = scanner.nextLine();
                     break;
             }
 

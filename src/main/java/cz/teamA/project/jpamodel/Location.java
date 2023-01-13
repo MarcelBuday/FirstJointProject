@@ -7,11 +7,13 @@ import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.Setter;
 
 import java.util.UUID;
 
 @Entity
 @Data
+@Setter
 @NoArgsConstructor
 
 public class Location {
@@ -42,10 +44,6 @@ public class Location {
     @Override
     public String toString() {
         return cityName + " " + countryName + " " + region + " " + longitude + " " + latitude + "\n";
-    }
-
-    public String toCSV() {
-        return  cityName + "," + countryName + "," + region + "," + longitude + "," + latitude + "," + accuWeatherKey + "\n";
     }
 }
 
