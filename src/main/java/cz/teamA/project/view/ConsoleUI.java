@@ -53,12 +53,29 @@ public class ConsoleUI {
         System.out.println("Enter region or press Enter");
     }
 
-    public void allLocations(List <Location> allLocations) {
-       allLocations.forEach(location -> System.out.println(location));
+    public void allLocations(List<Location> allLocations) {
+        allLocations.forEach(location -> System.out.println(location));
 
     }
-public void weatherInfo(List<WeatherInfo> weatherInfo){
-    weatherInfo.forEach(System.out::println);
+
+    public void weatherInfo(List<WeatherInfo> weatherInfo) {
+        weatherInfo.forEach(System.out::println);
+    }
+
+    public void appLoading(){
+        System.out.println("Applicaton loading");
+    }
+    public void systemMessage(String message, Class c) {
+        if (message != null) {
+            switch (message) {
+                case "UpdateDataFail" ->
+                        System.out.println("Data " + c.getSimpleName() + " were not found, file was not created");
+                case "GetDataFail" ->
+                        System.out.println("File " + c.getSimpleName() + " was not found, data were not loaded");
+            }
+        }
     }
 }
+
+
 

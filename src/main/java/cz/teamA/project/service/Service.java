@@ -166,12 +166,20 @@ public class Service<T> {
 
     }
 
-    public void updateData(List<T> data){
-            fileService.updateDataInFile(data);
+    public String updateDataInFile(List<T> data){
+        if(data.isEmpty()){
+            return "UpdateDataFail";
+        }
+        fileService.updateDataInFile(data);
+        return null;
     }
 
-    public void getData(Class c){
-        fileService.getDataFromFile(c);
+    public String getDataFromFile(Class c){
+        List dataFromFile = fileService.getDataFromFile(c);
+        if (dataFromFile == null){
+            return "GetDataFail";
+        }
+        return null;
     }
 
 

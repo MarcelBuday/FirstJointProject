@@ -1,7 +1,7 @@
 package cz.teamA.project.controller;
 
-import cz.teamA.project.jpamodel.Coordinates;
 import cz.teamA.project.jpamodel.Location;
+import cz.teamA.project.jpamodel.WeatherInfo;
 import cz.teamA.project.service.Service;
 import cz.teamA.project.view.ConsoleUI;
 
@@ -22,8 +22,10 @@ public class Controller {
     }
 
     public void appStart() throws IOException, InvocationTargetException, IllegalAccessException {
+        consoleUI.appLoading();
+        consoleUI.systemMessage(service.getDataFromFile(Location.class),Location.class);
+        consoleUI.systemMessage(service.getDataFromFile(WeatherInfo.class),WeatherInfo.class);
         consoleUI.showWelcomeMessage();
-
 
         label:
         while (true) {
@@ -41,8 +43,8 @@ public class Controller {
                     break;
                     //development choice
                 case "test":
-                 //  service.updateData(service.selectAllLocation());
-                 //   service.getData(Location.class);
+                   //service.updateDataInFile(service.selectAllLocation());
+                 //   service.getDataFrom(Location.class);
                     break;
                 default:
                     consoleUI.unknownChoice();
