@@ -69,9 +69,9 @@ public class ConsoleUI {
         if (message != null) {
             switch (message) {
                 case "UpdateDataFail" ->
-                        System.out.println("Data " + c.getSimpleName() + " were not found, file was not created");
+                        System.out.println("Data " + c.getSimpleName() + " were not found, file was not created.");
                 case "GetDataFail" ->
-                        System.out.println("File " + c.getSimpleName() + " was not found, data were not loaded");
+                        System.out.println("File " + c.getSimpleName() + " was not found, data were not loaded.");
             }
         }
     }
