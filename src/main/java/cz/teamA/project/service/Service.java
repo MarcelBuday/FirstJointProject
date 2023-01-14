@@ -6,6 +6,7 @@ import cz.teamA.project.jpamodel.WeatherInfo;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 @org.springframework.stereotype.Service
@@ -34,31 +35,57 @@ public class Service {
         System.out.println("Enter name of city");
         String city = scanner.nextLine();
         while (city.equals("") /*|| city.matches("^[^0-9]+$")*/) {
-            System.out.println("Unknown city, try again:");
+            System.out.println("You did not enter city name:");
             city = scanner.nextLine();
         }
-        System.out.println("Enter name of country");
-        String country = scanner.nextLine();
-        while (country.equals("")) {
-            System.out.println("Country can not be empty. Add country.");
-            country = scanner.nextLine();
-        }
-        System.out.println("Enter latitude of city or press Enter");
+        List<Location> locationInfo = APIService.getLocationInfo(city);
+        if (locationInfo.size() > 1) {
+            System.out.println("Select location, more locations were found, chose one by number or press A to chose all");
+            for (int i = 0; i < locationInfo.size(); i++) {
+                System.out.println(i + 1 + " " + locationInfo.get(i));
+            }
+            String pressed = scanner.nextLine();
+            if (pressed.equals("A")) {
+                for (Location location : locationInfo) {
+                    locationService.insertLocation(location);
+                }
+            } else {
+                int s = Integer.parseInt(pressed);
+                locationService.insertLocation(locationInfo.get(s - 1));
+            }
+        } else if (locationInfo.size() == 1) {
+            locationService.insertLocation(locationInfo.get(0));
+        } else {
+            System.out.println("City not known");
 
-        String trylatitude = scanner.nextLine();
-        double latitude = 0d;
-        if (!trylatitude.isEmpty()) {
-            latitude = Double.parseDouble(trylatitude);
         }
-        System.out.println("Enter longitude of city or press Enter");
-        String trylongitude = scanner.nextLine();
-        double longitude = 0d;
-        if (!trylongitude.isEmpty()) {
-            longitude = Double.parseDouble(trylongitude);
-        }
-        System.out.println("Enter region or press Enter");
-        String region = scanner.nextLine();
-        locationService.insertLocation(city, country, region, longitude, latitude);
+
+
+
+
+
+//        System.out.println("Enter name of country");
+//        String country = scanner.nextLine();
+//        while (country.equals("")) {
+//            System.out.println("Country can not be empty. Add country.");
+//            country = scanner.nextLine();
+//        }
+//        System.out.println("Enter latitude of city or press Enter");
+//
+//        String trylatitude = scanner.nextLine();
+//        double latitude = 0d;
+//        if (!trylatitude.isEmpty()) {
+//            latitude = Double.parseDouble(trylatitude);
+//        }
+//        System.out.println("Enter longitude of city or press Enter");
+//        String trylongitude = scanner.nextLine();
+//        double longitude = 0d;
+//        if (!trylongitude.isEmpty()) {
+//            longitude = Double.parseDouble(trylongitude);
+//        }
+//        System.out.println("Enter region or press Enter");
+//        String region = scanner.nextLine();
+//        locationService.insertLocation(city, country, region, longitude, latitude);
     }
 
     public List<Location> selectAllLocation() {
@@ -80,6 +107,7 @@ public class Service {
             String s1 = scanner.nextLine();
             LocalDate date;
 
+            //TODO switch neplní žádnou funkci z hlediska vybírání dat o počasí, pouze nastavuje datum.
             label:
             while (true) {
                 switch (s1) {
