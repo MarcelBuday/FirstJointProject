@@ -25,7 +25,7 @@ public class FileService<T> {
 
     public FileService() {
         this.gson = new GsonBuilder().setLenient().setPrettyPrinting().create();
-        String repository = System.getProperty("user.dir") + "\\src\\main\\java\\cz\\teamA\\project\\repository";
+        String repository = System.getProperty("user.dir") + "\\src\\main\\java\\cz\\teamA\\project\\repository\\data";
         repository = !separator.equals("\\") ? repository.replaceAll(Matcher.quoteReplacement("\\"), separator) : repository;
         this.locationFile = new File(repository, "locations.json");
         this.weatherInfoFile = new File(repository, "weatherInfo.json");
