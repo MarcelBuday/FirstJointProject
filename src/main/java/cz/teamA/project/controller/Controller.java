@@ -36,6 +36,9 @@ public class Controller {
                 case "3":
                     consoleUI.weatherInfo(service.getWeatherData());
                     break;
+                case "test":
+                    service.test(48.7172272,21.2496774);
+                    break;
                 default:
                     consoleUI.unknownChoice();
                     consoleUI.showWhatCanBeDone();

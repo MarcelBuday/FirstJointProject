@@ -137,6 +137,8 @@ public class Service {
         return null;
 
     }
-
+    public void test (double lat, double lon){
+        APIService.test(lat,lon);
+    }
 
 }
