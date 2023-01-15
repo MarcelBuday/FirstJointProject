@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 @org.springframework.stereotype.Service
-public class Service {
+public class Service<T> {
     private final LocationService locationService;
     private final APIService APIService;
     private final Scanner scanner;
