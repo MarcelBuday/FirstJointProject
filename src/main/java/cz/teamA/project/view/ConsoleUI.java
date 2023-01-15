@@ -59,12 +59,15 @@ public class ConsoleUI {
     }
 
     public void weatherInfo(List<WeatherInfo> weatherInfo) {
-        weatherInfo.forEach(System.out::println);
+        if (weatherInfo != null) {
+            weatherInfo.forEach(System.out::println);
+        }
     }
 
-    public void appLoading(){
+    public void appLoading() {
         System.out.println("Applicaton loading");
     }
+
     public void systemMessage(String message, Class c) {
         if (message != null) {
             switch (message) {

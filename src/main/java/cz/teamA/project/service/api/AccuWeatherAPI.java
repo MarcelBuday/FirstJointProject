@@ -74,7 +74,7 @@ public class AccuWeatherAPI {
                 double windDirection = e.getAsJsonObject().getAsJsonObject("Day")
                         .getAsJsonObject("Wind")
                         .getAsJsonObject("Direction")
-                        .get("Localized")
+                        .get("Degrees")
                         .getAsDouble();
                 double windSpeed = e.getAsJsonObject().getAsJsonObject("Day")
                         .getAsJsonObject("Wind")

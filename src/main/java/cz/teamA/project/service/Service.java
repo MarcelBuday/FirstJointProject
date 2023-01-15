@@ -142,21 +142,21 @@ public class Service<T> {
 //                System.out.println("Wrong format");
 //            }
 
-            final List<Location> locationInfo = APIService.getLocationInfo(locations.get(Integer.
-                    parseInt(s) - 1).getCityName());
-
-            if (locationInfo.size() > 1) {
-                System.out.println("Select location, more locations were found");
-                for (int i = 0; i < locationInfo.size(); i++) {
-                    System.out.println(i + 1 + " " + locationInfo.get(i));
-                }
-                s = scanner.nextLine();
-                return APIService.getWeatherInfo(locationInfo.get(Integer.parseInt(s) - 1).getAccuWeatherKey());
-            } else if (locationInfo.size() == 1) {
-                return APIService.getWeatherInfo(locationInfo.get(0).getAccuWeatherKey());
-            } else {
-                System.out.println("No location known");
-            }
+//            final List<Location> locationInfo = APIService.getLocationInfo(locations.get(Integer.
+//                    parseInt(s) - 1).getCityName());
+//
+//            if (locationInfo.size() > 1) {
+//                System.out.println("Select location, more locations were found");
+//                for (int i = 0; i < locationInfo.size(); i++) {
+//                    System.out.println(i + 1 + " " + locationInfo.get(i));
+//                }
+//                s = scanner.nextLine();
+                return APIService.getWeatherInfo(locations.get(Integer.parseInt(s) - 1).getAccuWeatherKey());
+//            } else if (locationInfo.size() == 1) {
+//                return APIService.getWeatherInfo(locationInfo.get(0).getAccuWeatherKey());
+//            } else {
+//                System.out.println("No location known");
+//            }
 
 
         } else {

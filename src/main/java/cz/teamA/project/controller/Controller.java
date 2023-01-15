@@ -21,7 +21,7 @@ public class Controller {
         this.service = service;
     }
 
-    public void appStart() throws IOException, InvocationTargetException, IllegalAccessException {
+    public void appStart(){
         consoleUI.appLoading();
         consoleUI.systemMessage(service.getDataFromFile(Location.class),Location.class);
         consoleUI.systemMessage(service.getDataFromFile(WeatherInfo.class),WeatherInfo.class);
