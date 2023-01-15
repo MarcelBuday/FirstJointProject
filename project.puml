@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+left to right direction
+package view{
+usecase ConsoleUI
+}
+package controller{
+usecase Controller
+}
+
+package service{
+usecase Service
+usecase LocationService
+usecase WeatherInfoService
+usecase APIService
+package api{
+usecase AccuWeatherAPI
+usecase OpenWeatherAPI
+}
+}
+
+package repository{
+usecase LocationRepository
+usecase WeatherInfoRepository
+}
+usecase DB
+usecase HTTP
+Service -- Controller
+ConsoleUI -- Controller
+Service -- LocationService
+Service -- WeatherInfoService
+Service -- APIService
+APIService -- OpenWeatherAPI
+APIService -- AccuWeatherAPI
+LocationService -- LocationRepository
+WeatherInfoService -- WeatherInfoRepository
+LocationRepository -- DB
+WeatherInfoRepository -- DB
+User -- view
+AccuWeatherAPI -- HTTP
+OpenWeatherAPI -- HTTP
+@enduml

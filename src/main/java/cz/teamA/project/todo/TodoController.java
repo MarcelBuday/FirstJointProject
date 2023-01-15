@@ -1,6 +1,5 @@
-package cz.teamA.project;
+package cz.teamA.project.todo;
 
-import cz.teamA.project.repository.CityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 
@@ -8,13 +7,13 @@ import org.springframework.stereotype.Controller;
 @RequiredArgsConstructor
 public class TodoController {
 
-    private final CityRepository cityRepository;
-    private final TodoService todoService;
+//    private final CityRepository cityRepository;
+//    private final TodoService todoService;
 //
 //
 //    //@ResponseBody
 //    @GetMapping({"/todo", "/"})
-//    public String list(@RequestParam(required = false) String isActive, Model model) {
+//    public String list(@RequestParam(required = false) String isActive, Service model) {
 //
 //        model.addAttribute("isActive", isActive);
 //        model.addAttribute("todos", cityRepository.findAll());

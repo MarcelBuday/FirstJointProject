@@ -1,0 +1,33 @@
+{
+  "uuid": "c5add5f7-f89c-41a1-a262-d5c2d7e61699",
+  "longitude": 21.265,
+  "latitude": 48.725,
+  "region": "Košice",
+  "cityName": "Kosice",
+  "countryName": "Slovakia",
+  "accuWeatherKey": 298738
+}{
+  "uuid": "f3e39489-272c-449c-adaa-fec0b70ea66c",
+  "longitude": 15.537,
+  "latitude": 50.186,
+  "region": "Hradec Králové",
+  "cityName": "Kosice",
+  "countryName": "Czechia",
+  "accuWeatherKey": 1375882
+}{
+  "uuid": "6fe29a0a-07ac-49d1-a35c-6fa4f8e7da22",
+  "longitude": 18.261,
+  "latitude": 50.772,
+  "region": "Opole",
+  "cityName": "Kosice",
+  "countryName": "Poland",
+  "accuWeatherKey": 2674254
+}{
+  "uuid": "3b3894e1-a386-42bb-89c1-a2ebbc90eca3",
+  "longitude": 19.007,
+  "latitude": 43.005,
+  "region": "Šavnik",
+  "cityName": "Kosice",
+  "countryName": "Montenegro",
+  "accuWeatherKey": 1691767
+}
