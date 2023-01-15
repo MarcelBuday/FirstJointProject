@@ -4,23 +4,23 @@ import cz.teamA.project.jpamodel.Location;
 import cz.teamA.project.jpamodel.WeatherInfo;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 @org.springframework.stereotype.Service
-public class Service {
+public class Service<T> {
     private final LocationService locationService;
     private final APIService APIService;
     private final Scanner scanner;
     private final WeatherInfoService weatherInfoService;
+    private final FileService fileService;
 
 
-    public Service(LocationService locationService, APIService APIService, WeatherInfoService weatherInfoService) {
+    public Service(LocationService locationService, APIService APIService, WeatherInfoService weatherInfoService, FileService fileService) {
         this.locationService = locationService;
         this.APIService = APIService;
         this.weatherInfoService = weatherInfoService;
+        this.fileService = fileService;
         this.scanner = new Scanner(System.in);
 
 
@@ -142,21 +142,21 @@ public class Service {
 //                System.out.println("Wrong format");
 //            }
 
-            final List<Location> locationInfo = APIService.getLocationInfo(locations.get(Integer.
-                    parseInt(s) - 1).getCityName());
-
-            if (locationInfo.size() > 1) {
-                System.out.println("Select location, more locations were found");
-                for (int i = 0; i < locationInfo.size(); i++) {
-                    System.out.println(i + 1 + " " + locationInfo.get(i));
-                }
-                s = scanner.nextLine();
-                return APIService.getWeatherInfo(locationInfo.get(Integer.parseInt(s) - 1).getAccuWeatherKey());
-            } else if (locationInfo.size() == 1) {
-                return APIService.getWeatherInfo(locationInfo.get(0).getAccuWeatherKey());
-            } else {
-                System.out.println("No location known");
-            }
+//            final List<Location> locationInfo = APIService.getLocationInfo(locations.get(Integer.
+//                    parseInt(s) - 1).getCityName());
+//
+//            if (locationInfo.size() > 1) {
+//                System.out.println("Select location, more locations were found");
+//                for (int i = 0; i < locationInfo.size(); i++) {
+//                    System.out.println(i + 1 + " " + locationInfo.get(i));
+//                }
+//                s = scanner.nextLine();
+                return APIService.getWeatherInfo(locations.get(Integer.parseInt(s) - 1).getAccuWeatherKey());
+//            } else if (locationInfo.size() == 1) {
+//                return APIService.getWeatherInfo(locationInfo.get(0).getAccuWeatherKey());
+//            } else {
+//                System.out.println("No location known");
+//            }
 
 
         } else {
@@ -164,6 +164,22 @@ public class Service {
         }
         return null;
 
+    }
+
+    public String updateDataInFile(List<T> data){
+        if(data.isEmpty()){
+            return "UpdateDataFail";
+        }
+        fileService.updateDataInFile(data);
+        return null;
+    }
+
+    public String getDataFromFile(Class c){
+        List dataFromFile = fileService.getDataFromFile(c);
+        if (dataFromFile == null){
+            return "GetDataFail";
+        }
+        return null;
     }
     public void test (double lat, double lon){
         APIService.test(lat,lon);

@@ -7,11 +7,13 @@ import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.Setter;
 
 import java.util.UUID;
 
 @Entity
 @Data
+@Setter
 @NoArgsConstructor
 
 public class Location {

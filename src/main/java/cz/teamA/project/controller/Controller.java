@@ -1,9 +1,12 @@
 package cz.teamA.project.controller;
 
-import cz.teamA.project.jpamodel.Coordinates;
+import cz.teamA.project.jpamodel.Location;
+import cz.teamA.project.jpamodel.WeatherInfo;
 import cz.teamA.project.service.Service;
 import cz.teamA.project.view.ConsoleUI;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
 
 @org.springframework.stereotype.Controller
@@ -18,7 +21,10 @@ public class Controller {
         this.service = service;
     }
 
-    public void appStart() {
+    public void appStart(){
+        consoleUI.appLoading();
+        consoleUI.systemMessage(service.getDataFromFile(Location.class),Location.class);
+        consoleUI.systemMessage(service.getDataFromFile(WeatherInfo.class),WeatherInfo.class);
         consoleUI.showWelcomeMessage();
 
 
@@ -41,8 +47,6 @@ public class Controller {
                     break;
                 default:
                     consoleUI.unknownChoice();
-                    consoleUI.showWhatCanBeDone();
-                    whatShouldBeDone = scanner.nextLine();
                     break;
             }
 

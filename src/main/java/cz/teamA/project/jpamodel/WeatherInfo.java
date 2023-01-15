@@ -3,11 +3,13 @@ package cz.teamA.project.jpamodel;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Entity
 @Data
+@Setter
 @NoArgsConstructor
 
 public class WeatherInfo {

@@ -46,9 +46,9 @@ public class OpenWeatherAPI {
             }
 
             return locationInfo;
-        } catch (IOException | URISyntaxException | InterruptedException ex) {
-            throw new RuntimeException(ex);
+        } catch (IOException | URISyntaxException | InterruptedException ignored){
         }
+        return null;
     }
 
     public List<WeatherInfo> getWeatherInfo(double lat, double lon) {
@@ -110,8 +110,8 @@ public class OpenWeatherAPI {
             }
             System.out.println(weatherInfos);
             return weatherInfos;
-        } catch (IOException | URISyntaxException | InterruptedException ex) {
-            throw new RuntimeException(ex);
+        } catch (IOException | URISyntaxException | InterruptedException ignored) {
         }
+        return null;
     }
 }
