@@ -27,6 +27,7 @@ public class Controller {
         consoleUI.systemMessage(service.getDataFromFile(WeatherInfo.class),WeatherInfo.class);
         consoleUI.showWelcomeMessage();
 
+
         label:
         while (true) {
             consoleUI.showWhatCanBeDone();
@@ -41,10 +42,8 @@ public class Controller {
                 case "3":
                     consoleUI.weatherInfo(service.getWeatherData());
                     break;
-                    //development choice
                 case "test":
-                   //service.updateDataInFile(service.selectAllLocation());
-                 //   service.getDataFrom(Location.class);
+                    service.test(48.7172272,21.2496774);
                     break;
                 default:
                     consoleUI.unknownChoice();

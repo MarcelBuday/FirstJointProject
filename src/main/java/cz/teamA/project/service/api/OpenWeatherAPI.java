@@ -1,9 +1,8 @@
 package cz.teamA.project.service.api;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
+import com.google.gson.*;
+import cz.teamA.project.jpamodel.Location;
+import cz.teamA.project.jpamodel.WeatherInfo;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -12,8 +11,10 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.HashMap;
-import java.util.Map;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class OpenWeatherAPI {
@@ -27,48 +28,88 @@ public class OpenWeatherAPI {
         gson = gsonBuilder.create();
     }
 
-    public void getLocationInfo(String city) {
+    public List<Location> getLocationInfo(String city) {
         String urlString = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + API_KEY;
         try {
             HttpRequest request = HttpRequest.newBuilder(new URI(urlString)).GET().build();
             HttpClient client = HttpClient.newHttpClient();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             JsonArray jsonArray = gson.fromJson(response.body(), JsonArray.class);
-            Map<String, String> locationInfo = new HashMap<>();
+            List<Location> locationInfo = new ArrayList<>();
+//            double latitude = jsonArray<
+//            double longitude = jsonArray.get("lon").getAsDouble();
+//            System.out.println(latitude + " " + longitude);
             for (JsonElement e : jsonArray) {
-                locationInfo.put(e.getAsJsonObject().getAsJsonObject("AdministrativeArea").get("LocalizedName").getAsString(), e.getAsJsonObject().get("lat").getAsString() + "," + e.getAsJsonObject().get("lon").getAsString());
+                double latitude = e.getAsJsonObject().get("lat").getAsDouble();
+                double longitude = e.getAsJsonObject().get("lon").getAsDouble();
+                System.out.println(latitude + " " + longitude);
             }
+
+            return locationInfo;
         } catch (IOException | URISyntaxException | InterruptedException ex) {
             throw new RuntimeException(ex);
         }
     }
 
-    public void getWeatherInfo(int key) {
-        String urlString = "http://dataservice.accuweather.com/currentconditions/v1/" + key + "?apikey=" + API_KEY + "&details=true";
+    public List<WeatherInfo> getWeatherInfo(double lat, double lon) {
+        String urlString = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" +
+                "" + lon + "&units=metric&appid=" + API_KEY;
         try {
             HttpRequest request = HttpRequest.newBuilder(new URI(urlString)).GET().build();
             HttpClient client = HttpClient.newHttpClient();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            JsonArray jsonArray = gson.fromJson(response.body(), JsonArray.class);
-            JsonElement jsonElement = jsonArray.get(0);
-            double temperature = jsonElement.getAsJsonObject().getAsJsonObject("Temperature").getAsJsonObject()
-                    .getAsJsonObject("Metric").getAsJsonObject()
-                    .get("Value")
-                    .getAsDouble();
-            double pressure = jsonElement.getAsJsonObject().getAsJsonObject("Pressure")
-                    .getAsJsonObject("Metric")
-                    .get("Value")
-                    .getAsDouble();
-            double humidity = jsonElement.getAsJsonObject().get("RelativeHumidity").getAsDouble();
-            double windDirection = jsonElement.getAsJsonObject()
-                    .getAsJsonObject("Wind")
-                    .getAsJsonObject("Direction"
-                    ).get("Degrees").getAsDouble();
-            double windSpeed = jsonElement.getAsJsonObject().getAsJsonObject("Wind")
-                    .getAsJsonObject("Speed")
-                    .getAsJsonObject("Metric")
-                    .get("Value")
-                    .getAsDouble();
+            System.out.println(response.body());
+            JsonObject jsonObject = gson.fromJson(response.body(), JsonObject.class);
+            List<WeatherInfo> weatherInfos = new ArrayList<>();
+            LocalDate localDate = LocalDate.now();
+            JsonArray dailyForecasts = jsonObject.get("list").getAsJsonArray();
+            List<Double> temperatures = new ArrayList<>();
+            List<Double> windSpeeds = new ArrayList<>();
+            List<Double> windDirections = new ArrayList<>();
+            int count = 0;
+
+            for (JsonElement e : dailyForecasts) {
+                LocalDate day = LocalDate.parse(e.getAsJsonObject()
+                        .get("dt_txt")
+                        .getAsString().substring(0, 10));
+                double temperature = e.getAsJsonObject().getAsJsonObject("main")
+                        .get("temp")
+                        .getAsDouble();
+                double windSpeed = e.getAsJsonObject().getAsJsonObject("wind")
+                        .get("speed")
+                        .getAsDouble();
+                double windDirection = e.getAsJsonObject().getAsJsonObject("wind")
+                        .get("deg")
+                        .getAsDouble();
+                if (localDate.isEqual(day)) {
+                    temperatures.add(temperature);
+                    windSpeeds.add(windSpeed);
+                    windDirections.add(windDirection);
+                } else if (!localDate.isEqual(day)) {
+                    double temperatureMin = temperatures.stream().min(Double::compare).get();
+                    double temperatureMax = temperatures.stream().max(Double::compare).get();
+                    temperatures = new ArrayList<>();
+                    temperatures.add(temperature);
+                    double windSpeedAverage = windSpeeds.stream().mapToDouble(ws -> ws).average().getAsDouble();
+                    double windDirectionAverage = windDirections.stream().mapToDouble(wd -> wd).average().getAsDouble();
+                    windSpeeds = new ArrayList<>();
+                    windDirections = new ArrayList<>();
+                    windSpeeds.add(windSpeed);
+                    windDirections.add(windDirection);
+                    weatherInfos.add(new WeatherInfo(temperatureMin, temperatureMax, windDirectionAverage, windSpeedAverage, localDate));
+                    localDate = localDate.plusDays(1);
+                }
+                if (count == dailyForecasts.size() - 1) {
+                    double temperatureMin = temperatures.stream().min(Double::compare).get();
+                    double temperatureMax = temperatures.stream().max(Double::compare).get();
+                    double windSpeedAverage = windSpeeds.stream().mapToDouble(ws -> ws).average().getAsDouble();
+                    double windDirectionAverage = windDirections.stream().mapToDouble(wd -> wd).average().getAsDouble();
+                    weatherInfos.add(new WeatherInfo(temperatureMin, temperatureMax, windDirectionAverage, windSpeedAverage, localDate));
+                }
+                count++;
+            }
+            System.out.println(weatherInfos);
+            return weatherInfos;
         } catch (IOException | URISyntaxException | InterruptedException ex) {
             throw new RuntimeException(ex);
         }

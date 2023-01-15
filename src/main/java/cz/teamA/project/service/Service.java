@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 @org.springframework.stereotype.Service
-public class Service<T> {
+public class Service {
     private final LocationService locationService;
     private final APIService APIService;
     private final Scanner scanner;
@@ -181,6 +181,8 @@ public class Service<T> {
         }
         return null;
     }
-
+    public void test (double lat, double lon){
+        APIService.test(lat,lon);
+    }
 
 }

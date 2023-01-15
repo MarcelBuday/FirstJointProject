@@ -71,11 +71,11 @@ public class AccuWeatherAPI {
                         .getAsJsonObject("Maximum")
                         .get("Value")
                         .getAsDouble();
-                String windDirection = e.getAsJsonObject().getAsJsonObject("Day")
+                double windDirection = e.getAsJsonObject().getAsJsonObject("Day")
                         .getAsJsonObject("Wind")
                         .getAsJsonObject("Direction")
                         .get("Localized")
-                        .getAsString();
+                        .getAsDouble();
                 double windSpeed = e.getAsJsonObject().getAsJsonObject("Day")
                         .getAsJsonObject("Wind")
                         .getAsJsonObject("Speed")
