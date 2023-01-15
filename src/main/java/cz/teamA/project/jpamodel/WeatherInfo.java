@@ -16,14 +16,14 @@ public class WeatherInfo {
     private long id;
     private double temperatureMin;
     private double temperatureMax;
-    private String windDirection;
+    private double windDirection;
     private double windSpeed;
 
     @ManyToOne
     private Location location;
     private LocalDate date;
 
-    public WeatherInfo(double temperatureMin, double temperatureMax, String windDirection, double windSpeed,
+    public WeatherInfo(double temperatureMin, double temperatureMax, double windDirection, double windSpeed,
                        Location location, LocalDate date) {
         this.temperatureMin = temperatureMin;
         this.temperatureMax = temperatureMax;
@@ -33,7 +33,7 @@ public class WeatherInfo {
         this.date = date;
     }
 
-    public WeatherInfo(double temperatureMin, double temperatureMax, String windDirection, double windSpeed, LocalDate date) {
+    public WeatherInfo(double temperatureMin, double temperatureMax, double windDirection, double windSpeed, LocalDate date) {
         this.temperatureMin = temperatureMin;
         this.temperatureMax = temperatureMax;
         this.windDirection = windDirection;

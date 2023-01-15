@@ -51,7 +51,7 @@ public class OpenWeatherAPI {
         }
     }
 
-    public List<WeatherInfo>  getWeatherInfo(double lat, double lon) {
+    public List<WeatherInfo> getWeatherInfo(double lat, double lon) {
         String urlString = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" +
                 "" + lon + "&units=metric&appid=" + API_KEY;
         try {
@@ -85,7 +85,7 @@ public class OpenWeatherAPI {
                     temperatures.add(temperature);
                     windSpeeds.add(windSpeed);
                     windDirections.add(windDirection);
-                } else if(! localDate.isEqual(day) || count == dailyForecasts.size() -1){
+                } else if (!localDate.isEqual(day)) {
                     double temperatureMin = temperatures.stream().min(Double::compare).get();
                     double temperatureMax = temperatures.stream().max(Double::compare).get();
                     temperatures = new ArrayList<>();
@@ -96,15 +96,17 @@ public class OpenWeatherAPI {
                     windDirections = new ArrayList<>();
                     windSpeeds.add(windSpeed);
                     windDirections.add(windDirection);
-                    weatherInfos.add(new WeatherInfo(temperatureMin, temperatureMax,
-                            String.valueOf(windDirectionAverage), windSpeedAverage, localDate));
+                    weatherInfos.add(new WeatherInfo(temperatureMin, temperatureMax, windDirectionAverage, windSpeedAverage, localDate));
                     localDate = localDate.plusDays(1);
-
-
-
                 }
-
-                count ++;
+                if (count == dailyForecasts.size() - 1) {
+                    double temperatureMin = temperatures.stream().min(Double::compare).get();
+                    double temperatureMax = temperatures.stream().max(Double::compare).get();
+                    double windSpeedAverage = windSpeeds.stream().mapToDouble(ws -> ws).average().getAsDouble();
+                    double windDirectionAverage = windDirections.stream().mapToDouble(wd -> wd).average().getAsDouble();
+                    weatherInfos.add(new WeatherInfo(temperatureMin, temperatureMax, windDirectionAverage, windSpeedAverage, localDate));
+                }
+                count++;
             }
             System.out.println(weatherInfos);
             return weatherInfos;
