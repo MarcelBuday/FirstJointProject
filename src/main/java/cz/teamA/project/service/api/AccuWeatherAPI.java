@@ -45,11 +45,12 @@ public class AccuWeatherAPI {
                 locations.add(location);
             }
             return locations;
-        } catch (IOException | URISyntaxException | InterruptedException ex) {
-            throw new RuntimeException(ex);
+        } catch (IOException | URISyntaxException | InterruptedException ignored) {
         }
+        return null;
     }
-//TODO UPDATE METODY
+
+    //TODO UPDATE METODY
     //API KEY vkládat přes proměnnou
     // použít key z parametrů
     public List<WeatherInfo> getWeatherInfo(int key) {
@@ -81,14 +82,14 @@ public class AccuWeatherAPI {
                         .getAsJsonObject("Speed")
                         .get("Value")
                         .getAsDouble();
-                LocalDate date = LocalDate.parse(e.getAsJsonObject().get("Date").getAsString().substring(0,10));
+                LocalDate date = LocalDate.parse(e.getAsJsonObject().get("Date").getAsString().substring(0, 10));
 
-               WeatherInfo weatherInfo = new WeatherInfo(temperatureMin,temperatureMax,windDirection,windSpeed,date);
-               weatherInfos.add(weatherInfo);
+                WeatherInfo weatherInfo = new WeatherInfo(temperatureMin, temperatureMax, windDirection, windSpeed, date);
+                weatherInfos.add(weatherInfo);
             }
             return weatherInfos;
-        } catch (IOException | URISyntaxException | InterruptedException ex) {
-            throw new RuntimeException(ex);
+        } catch (IOException | URISyntaxException | InterruptedException ignored) {
         }
+        return null;
     }
 }
