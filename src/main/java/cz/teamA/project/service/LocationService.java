@@ -24,8 +24,27 @@ public class LocationService {
         locationRepository.save(location);
     }
 
+    public void insertListOfLocation(List<Location> locations) {
+        locationRepository.saveAll(locations);
+    }
+
     public List<Location> selectAllLocation() {
         return locationRepository.findAll();
     }
+
+    public List<Location> selectAllLocationsWithEnteredCityName(String city) {
+        return locationRepository.findByCityName(city);
+    }
+
+    public boolean notInDatabaseYet(Location location, List<Location> existingInDatabase ) {
+        boolean notInDatabaseYet = true;
+        for (Location loc : existingInDatabase) {
+            if (location.getAccuWeatherKey() == loc.getAccuWeatherKey()) {
+                notInDatabaseYet = false;
+            }
+        }
+        return notInDatabaseYet;
+    }
+
 
 }

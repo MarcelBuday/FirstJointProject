@@ -12,9 +12,7 @@ import java.util.List;
 @Component
 public class ConsoleUI {
     private final String WELCOME_MESSAGE = "Welcome to WeatherLady app!";
-    private final String FIRST_CHOICE = "Press 1 for adding location for weather forecast";
-    private final String SECOND_CHOICE = "Press 2 for showing existing locations";
-    private final String THIRD_CHOICE = "Press 3 for downloading weather values";
+
     public Object latitude;
     private String enterCityName;
 
@@ -22,10 +20,11 @@ public class ConsoleUI {
         System.out.println(WELCOME_MESSAGE);
     }
 
-    public void showWhatCanBeDone() {
-        System.out.println(FIRST_CHOICE);
-        System.out.println(SECOND_CHOICE);
-        System.out.println(THIRD_CHOICE);
+    public void mainMenu() {
+        System.out.println("Press 1 for adding location for weather forecast");
+        System.out.println("Press 2 for showing existing locations");
+        System.out.println("Press 3 for downloading weather values");
+        System.out.println("Press 0 for leaving the app");
     }
 
     public void unknownChoice() {
@@ -33,7 +32,7 @@ public class ConsoleUI {
     }
 
     public void cityName() {
-        System.out.println("Enter name of city");
+        System.out.println("Enter name of city, cannot stay empty");
 
     }
 
@@ -77,6 +76,14 @@ public class ConsoleUI {
                         System.err.println("File " + c.getSimpleName() + " was not found, data were not loaded.");
             }
         }
+    }
+
+    public void reconfirmDesireToAddEnteredCityName(List<Location> existingRecordsWithSameCityName) {
+
+        System.out.println("City with such name already exist in our database, see below: \n");
+        allLocations(existingRecordsWithSameCityName);
+        System.out.println("If your requested city is not in the list above, press C to continue adding new location with the city name");
+
     }
 }
 

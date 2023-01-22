@@ -40,10 +40,13 @@ public class Location {
         this.accuWeatherKey = accuWeatherKey;
     }
 
+    public int getAccuWeatherKey() {
+        return accuWeatherKey;
+    }
 
     @Override
     public String toString() {
-        return cityName + " " + countryName + " " + region + " " + longitude + " " + latitude + "\n";
+        return cityName + " Country: " + countryName + " Region: " + region + " Longitude: " + longitude + " Latitude: " + latitude + "\n";
     }
 }
 

@@ -5,8 +5,6 @@ import cz.teamA.project.jpamodel.WeatherInfo;
 import cz.teamA.project.service.Service;
 import cz.teamA.project.view.ConsoleUI;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
 
 @org.springframework.stereotype.Controller
@@ -30,17 +28,30 @@ public class Controller {
 
         label:
         while (true) {
-            consoleUI.showWhatCanBeDone();
+            consoleUI.mainMenu();
             String whatShouldBeDone = scanner.nextLine();
             switch (whatShouldBeDone) {
                 case "1":
-                    service.addLocation();
+                    consoleUI.cityName();
+                    String newCityProposal = service.enterNewCityNameForValidation();
+                    if (service.cityNameForValidationAlreadyExistsInOurDatabase(newCityProposal)) {
+                        consoleUI.reconfirmDesireToAddEnteredCityName(service.listOfLocationRecordsWithSameCityNameAsArgument(newCityProposal));
+                        if (service.needToSaveNewLocationWithTheSameCityName()){
+                            service.addLocation(newCityProposal);
+                        }
+                        // asi to uklada vzdy / pores breaky, zkus napsat obecne zadani nextline do klavesnice a obecnou volbu z klavesnice
+
+                    }
+                    service.addLocation(newCityProposal);
                     break;
                 case "2":
                     consoleUI.allLocations(service.selectAllLocation());
                     break;
                 case "3":
                     consoleUI.weatherInfo(service.getWeatherData());
+                    break;
+                case "0":
+                    System.exit(0);
                     break;
                 case "test":
                     service.test(48.7172272,21.2496774);

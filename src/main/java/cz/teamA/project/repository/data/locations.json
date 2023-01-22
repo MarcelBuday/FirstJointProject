@@ -30,4 +30,20 @@
   "cityName": "Kosice",
   "countryName": "Montenegro",
   "accuWeatherKey": 1691767
+}{
+  "uuid": "b4ce7f4f-154c-43ca-859c-7cabe7d86131",
+  "longitude": 16.609,
+  "latitude": 49.192,
+  "region": "South Moravian",
+  "cityName": "Brno",
+  "countryName": "Czechia",
+  "accuWeatherKey": 123291
+}{
+  "uuid": "d95c2afe-6204-46f6-b1f4-15d35b89f41f",
+  "longitude": 15.47,
+  "latitude": 50.709,
+  "region": "Liberec",
+  "cityName": "Brno",
+  "countryName": "Czechia",
+  "accuWeatherKey": 3394756
 }

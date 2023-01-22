@@ -30,38 +30,45 @@ public class Service<T> {
 //        APIService.getWeatherInfoByLocation(location);
 //    }
 
-    public void addLocation() {
-
-        System.out.println("Enter name of city");
-        String city = scanner.nextLine();
-        while (city.equals("") /*|| city.matches("^[^0-9]+$")*/) {
-            System.out.println("You did not enter city name:");
-            city = scanner.nextLine();
-        }
-        List<Location> locationInfo = APIService.getLocationInfo(city);
-        if (locationInfo.size() > 1) {
+    public void addLocation(String newCityProposal) {
+//
+//        System.out.println("Enter name of city");
+//        String city = scanner.nextLine();
+//        while (city.equals("") /*|| city.matches("^[^0-9]+$")*/) {
+//            System.out.println("You did not enter city name:");
+//            city = scanner.nextLine();
+//        }
+        List<Location> locationInfoAccuWeather = APIService.getLocationInfo(newCityProposal);
+        List<Location> locationsInDatabase = locationService.selectAllLocationsWithEnteredCityName(newCityProposal);
+        if (locationInfoAccuWeather.size() > 1) {
             System.out.println("Select location, more locations were found, chose one by number or press A to chose all");
-            for (int i = 0; i < locationInfo.size(); i++) {
-                System.out.println(i + 1 + " " + locationInfo.get(i));
+            for (int i = 0; i < locationInfoAccuWeather.size(); i++) {
+                System.out.println(i + 1 + " " + locationInfoAccuWeather.get(i));
             }
             String pressed = scanner.nextLine();
             if (pressed.equals("A")) {
-                for (Location location : locationInfo) {
-                    locationService.insertLocation(location);
+                for (Location location : locationInfoAccuWeather) {
+                    if (locationService.notInDatabaseYet(location, locationsInDatabase)) {
+                        locationService.insertLocation(location);
+                        fileService.updateDataInFile(List.of(location));
+                    }
                 }
             } else {
                 int s = Integer.parseInt(pressed);
-                locationService.insertLocation(locationInfo.get(s - 1));
+                if (locationService.notInDatabaseYet(locationInfoAccuWeather.get(s - 1), locationsInDatabase)) {
+                    locationService.insertLocation(locationInfoAccuWeather.get(s - 1));
+                    fileService.updateDataInFile(List.of(locationInfoAccuWeather.get(s - 1)));
+                }
             }
-        } else if (locationInfo.size() == 1) {
-            locationService.insertLocation(locationInfo.get(0));
+        } else if (locationInfoAccuWeather.size() == 1) {
+            if (locationService.notInDatabaseYet(locationInfoAccuWeather.get(0),locationsInDatabase)) {
+                locationService.insertLocation(locationInfoAccuWeather.get(0));
+                fileService.updateDataInFile(List.of(locationInfoAccuWeather.get(0)));
+            }
         } else {
             System.out.println("City not known");
 
         }
-
-
-
 
 
 //        System.out.println("Enter name of country");
@@ -151,7 +158,7 @@ public class Service<T> {
 //                    System.out.println(i + 1 + " " + locationInfo.get(i));
 //                }
 //                s = scanner.nextLine();
-                return APIService.getWeatherInfo(locations.get(Integer.parseInt(s) - 1).getAccuWeatherKey());
+            return APIService.getWeatherInfo(locations.get(Integer.parseInt(s) - 1).getAccuWeatherKey());
 //            } else if (locationInfo.size() == 1) {
 //                return APIService.getWeatherInfo(locationInfo.get(0).getAccuWeatherKey());
 //            } else {
@@ -166,23 +173,53 @@ public class Service<T> {
 
     }
 
-    public String updateDataInFile(List<T> data){
-        if(data.isEmpty()){
+    public String updateDataInFile(List<T> data) {
+        if (data.isEmpty()) {
             return "UpdateDataFail";
         }
         fileService.updateDataInFile(data);
         return null;
     }
 
-    public String getDataFromFile(Class c){
+    public String getDataFromFile(Class c) {
         List dataFromFile = fileService.getDataFromFile(c);
-        if (dataFromFile == null){
+        if (dataFromFile == null) {
             return "GetDataFail";
         }
+        locationService.insertListOfLocation(dataFromFile);
         return null;
     }
-    public void test (double lat, double lon){
-        APIService.test(lat,lon);
+
+    public void test(double lat, double lon) {
+        APIService.test(lat, lon);
+    }
+
+    public String enterNewCityNameForValidation() {
+        String cityProposal = scanner.nextLine();
+        while (cityProposal.isEmpty()) {
+            cityProposal = scanner.nextLine();
+        }
+        return cityProposal;
+    }
+
+    public boolean cityNameForValidationAlreadyExistsInOurDatabase(String cityNameForValidation) {
+        if (locationService.selectAllLocationsWithEnteredCityName(cityNameForValidation).size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public List<Location> listOfLocationRecordsWithSameCityNameAsArgument(String city) {
+        return locationService.selectAllLocationsWithEnteredCityName(city);
+    }
+
+    public boolean needToSaveNewLocationWithTheSameCityName() {
+        if (scanner.nextLine().equals("C")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
