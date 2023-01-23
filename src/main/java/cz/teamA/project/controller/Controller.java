@@ -1,5 +1,6 @@
 package cz.teamA.project.controller;
 
+import cz.teamA.project.dto.WeatherInfoDto;
 import cz.teamA.project.jpamodel.Location;
 import cz.teamA.project.jpamodel.WeatherInfo;
 import cz.teamA.project.service.Service;
@@ -22,7 +23,7 @@ public class Controller {
     public void appStart(){
         consoleUI.appLoading();
         consoleUI.systemMessage(service.getDataFromFile(Location.class),Location.class);
-        consoleUI.systemMessage(service.getDataFromFile(WeatherInfo.class),WeatherInfo.class);
+        consoleUI.systemMessage(service.getDataFromFile(WeatherInfoDto.class),WeatherInfoDto.class);
         consoleUI.showWelcomeMessage();
 
 

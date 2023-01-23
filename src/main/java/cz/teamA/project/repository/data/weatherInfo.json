@@ -1,0 +1,91 @@
+{
+  "id": 1,
+  "temperatureMin": 1.8,
+  "temperatureMax": 3.9,
+  "windDirection": 28.0,
+  "windSpeed": 11.1,
+  "location": {
+    "uuid": "b4ce7f4f-154c-43ca-859c-7cabe7d86131",
+    "longitude": 16.609,
+    "latitude": 49.192,
+    "region": "South Moravian",
+    "cityName": "Brno",
+    "countryName": "Czechia",
+    "accuWeatherKey": 123291
+  },
+  "year": 2023,
+  "month": 1,
+  "day": 23
+}{
+  "id": 2,
+  "temperatureMin": -0.2,
+  "temperatureMax": 3.9,
+  "windDirection": 36.0,
+  "windSpeed": 16.7,
+  "location": {
+    "uuid": "b4ce7f4f-154c-43ca-859c-7cabe7d86131",
+    "longitude": 16.609,
+    "latitude": 49.192,
+    "region": "South Moravian",
+    "cityName": "Brno",
+    "countryName": "Czechia",
+    "accuWeatherKey": 123291
+  },
+  "year": 2023,
+  "month": 1,
+  "day": 24
+}{
+  "id": 3,
+  "temperatureMin": -1.5,
+  "temperatureMax": 3.4,
+  "windDirection": 45.0,
+  "windSpeed": 13.0,
+  "location": {
+    "uuid": "b4ce7f4f-154c-43ca-859c-7cabe7d86131",
+    "longitude": 16.609,
+    "latitude": 49.192,
+    "region": "South Moravian",
+    "cityName": "Brno",
+    "countryName": "Czechia",
+    "accuWeatherKey": 123291
+  },
+  "year": 2023,
+  "month": 1,
+  "day": 25
+}{
+  "id": 4,
+  "temperatureMin": -1.6,
+  "temperatureMax": 2.0,
+  "windDirection": 183.0,
+  "windSpeed": 7.4,
+  "location": {
+    "uuid": "b4ce7f4f-154c-43ca-859c-7cabe7d86131",
+    "longitude": 16.609,
+    "latitude": 49.192,
+    "region": "South Moravian",
+    "cityName": "Brno",
+    "countryName": "Czechia",
+    "accuWeatherKey": 123291
+  },
+  "year": 2023,
+  "month": 1,
+  "day": 26
+}{
+  "id": 5,
+  "temperatureMin": -2.9,
+  "temperatureMax": 1.1,
+  "windDirection": 14.0,
+  "windSpeed": 13.0,
+  "location": {
+    "uuid": "b4ce7f4f-154c-43ca-859c-7cabe7d86131",
+    "longitude": 16.609,
+    "latitude": 49.192,
+    "region": "South Moravian",
+    "cityName": "Brno",
+    "countryName": "Czechia",
+    "accuWeatherKey": 123291
+  },
+  "year": 2023,
+  "month": 1,
+  "day": 27
+}

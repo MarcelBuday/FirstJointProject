@@ -3,6 +3,7 @@ package cz.teamA.project.service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
+import cz.teamA.project.jpamodel.WeatherInfo;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -74,7 +75,7 @@ public class FileService<T> {
             case "Location" -> {
                 return locationFile;
             }
-            case "WeatherInfo" -> {
+            case "WeatherInfoDto" -> {
                 return weatherInfoFile;
             }
         }

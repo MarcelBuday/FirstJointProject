@@ -11,5 +11,5 @@ import java.util.UUID;
 public interface LocationRepository extends JpaRepository<Location, UUID> {
     List<Location> findByCityName(String cityName);
 
-    List<Location> findByAccuWeatherKey(int accuWeatherKey);
+    Location findByAccuWeatherKey(int accuWeatherKey);
 }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -51,6 +52,8 @@ public class WeatherInfo {
         this.location = location;
         this.date = weatherInfo.getDate();
     }
+
+
 
     @Override
     public String toString() {

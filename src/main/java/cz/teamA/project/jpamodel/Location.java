@@ -40,6 +40,16 @@ public class Location {
         this.accuWeatherKey = accuWeatherKey;
     }
 
+    public Location(UUID uuid, double longitude, double latitude, String region, @NonNull String cityName, @NonNull String countryName, int accuWeatherKey) {
+        this.uuid = uuid;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.region = region;
+        this.cityName = cityName;
+        this.countryName = countryName;
+        this.accuWeatherKey = accuWeatherKey;
+    }
+
     public int getAccuWeatherKey() {
         return accuWeatherKey;
     }

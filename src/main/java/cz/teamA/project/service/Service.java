@@ -14,13 +14,15 @@ public class Service<T> {
     private final Scanner scanner;
     private final WeatherInfoService weatherInfoService;
     private final FileService fileService;
+    private final DtoService dtoService;
 
 
-    public Service(LocationService locationService, APIService APIService, WeatherInfoService weatherInfoService, FileService fileService) {
+    public Service(LocationService locationService, APIService APIService, WeatherInfoService weatherInfoService, FileService fileService, DtoService dtoService) {
         this.locationService = locationService;
         this.APIService = APIService;
         this.weatherInfoService = weatherInfoService;
         this.fileService = fileService;
+        this.dtoService = dtoService;
         this.scanner = new Scanner(System.in);
 
 
@@ -31,15 +33,9 @@ public class Service<T> {
 //    }
 
     public void addLocation(String newCityProposal) {
-//
-//        System.out.println("Enter name of city");
-//        String city = scanner.nextLine();
-//        while (city.equals("") /*|| city.matches("^[^0-9]+$")*/) {
-//            System.out.println("You did not enter city name:");
-//            city = scanner.nextLine();
-//        }
+
         List<Location> locationInfoAccuWeather = APIService.getLocationInfo(newCityProposal);
-        List<Location> locationsInDatabase = locationService.selectAllLocationsWithEnteredCityName(newCityProposal);
+        List<Location> locationsInDatabase = locationService.selectAllLocation();
         if (locationInfoAccuWeather.size() > 1) {
             System.out.println("Select location, more locations were found, chose one by number or press A to chose all");
             for (int i = 0; i < locationInfoAccuWeather.size(); i++) {
@@ -61,7 +57,7 @@ public class Service<T> {
                 }
             }
         } else if (locationInfoAccuWeather.size() == 1) {
-            if (locationService.notInDatabaseYet(locationInfoAccuWeather.get(0),locationsInDatabase)) {
+            if (locationService.notInDatabaseYet(locationInfoAccuWeather.get(0), locationsInDatabase)) {
                 locationService.insertLocation(locationInfoAccuWeather.get(0));
                 fileService.updateDataInFile(List.of(locationInfoAccuWeather.get(0)));
             }
@@ -69,30 +65,6 @@ public class Service<T> {
             System.out.println("City not known");
 
         }
-
-
-//        System.out.println("Enter name of country");
-//        String country = scanner.nextLine();
-//        while (country.equals("")) {
-//            System.out.println("Country can not be empty. Add country.");
-//            country = scanner.nextLine();
-//        }
-//        System.out.println("Enter latitude of city or press Enter");
-//
-//        String trylatitude = scanner.nextLine();
-//        double latitude = 0d;
-//        if (!trylatitude.isEmpty()) {
-//            latitude = Double.parseDouble(trylatitude);
-//        }
-//        System.out.println("Enter longitude of city or press Enter");
-//        String trylongitude = scanner.nextLine();
-//        double longitude = 0d;
-//        if (!trylongitude.isEmpty()) {
-//            longitude = Double.parseDouble(trylongitude);
-//        }
-//        System.out.println("Enter region or press Enter");
-//        String region = scanner.nextLine();
-//        locationService.insertLocation(city, country, region, longitude, latitude);
     }
 
     public List<Location> selectAllLocation() {
@@ -142,21 +114,15 @@ public class Service<T> {
             }
             List<WeatherInfo> weatherInfoFiveDays = APIService.getWeatherInfo(locations.get(Integer.parseInt(s) - 1).getAccuWeatherKey());
             WeatherInfo actual = null;
-            for (WeatherInfo weatherInfo:weatherInfoFiveDays) {
+            for (WeatherInfo weatherInfo : weatherInfoFiveDays) {
                 weatherInfo.setLocation(locations.get(Integer.parseInt(s) - 1));
                 if (weatherInfo.getDate().equals(date)) {
                     actual = weatherInfo;
                 }
             }
             weatherInfoService.insertWeatherFiveDaysForLocation(weatherInfoFiveDays);
-
-//            fileService.updateDataInFile(weatherInfoFiveDays);
+            fileService.updateDataInFile(dtoService.toWeatherInfoDtoList(weatherInfoFiveDays));
             return List.of(actual);
-//            } else if (locationInfo.size() == 1) {
-//                return APIService.getWeatherInfo(locationInfo.get(0).getAccuWeatherKey());
-//            } else {
-//                System.out.println("No location known");
-//            }
 
 
         } else {
@@ -179,7 +145,14 @@ public class Service<T> {
         if (dataFromFile == null) {
             return "GetDataFail";
         }
-        locationService.insertListOfLocation(dataFromFile);
+        if (c.equals(Location.class)) {
+            locationService.insertListOfLocation(dataFromFile);
+        } else {
+            List<WeatherInfo> list = dtoService.toWeatherInfoList(dataFromFile);
+            Location temp = locationService.selectLocationByAccuWeatherKey(list.get(0).getLocation().getAccuWeatherKey());
+            list.forEach(w -> w.getLocation().setUuid(temp.getUuid()));
+            weatherInfoService.insertWeatherFiveDaysForLocation(list);
+        }
         return null;
     }
 

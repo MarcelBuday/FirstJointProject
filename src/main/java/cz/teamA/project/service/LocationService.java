@@ -36,6 +36,10 @@ public class LocationService {
         return locationRepository.findByCityName(city);
     }
 
+    public Location selectLocationByAccuWeatherKey(int key){
+        return locationRepository.findByAccuWeatherKey(key);
+    }
+
     public boolean notInDatabaseYet(Location location, List<Location> existingInDatabase ) {
         boolean notInDatabaseYet = true;
         for (Location loc : existingInDatabase) {
