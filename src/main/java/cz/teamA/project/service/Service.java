@@ -140,25 +140,18 @@ public class Service<T> {
 
                 }
             }
-//            LocalDate date;
-//            try {
-//                date = LocalDate.parse(s1);
-//            } catch (DateTimeParseException e) {
-//                date = LocalDate.now();
-//                date = date.plusDays(1);
-//                System.out.println("Wrong format");
-//            }
+            List<WeatherInfo> weatherInfoFiveDays = APIService.getWeatherInfo(locations.get(Integer.parseInt(s) - 1).getAccuWeatherKey());
+            WeatherInfo actual = null;
+            for (WeatherInfo weatherInfo:weatherInfoFiveDays) {
+                weatherInfo.setLocation(locations.get(Integer.parseInt(s) - 1));
+                if (weatherInfo.getDate().equals(date)) {
+                    actual = weatherInfo;
+                }
+            }
+            weatherInfoService.insertWeatherFiveDaysForLocation(weatherInfoFiveDays);
 
-//            final List<Location> locationInfo = APIService.getLocationInfo(locations.get(Integer.
-//                    parseInt(s) - 1).getCityName());
-//
-//            if (locationInfo.size() > 1) {
-//                System.out.println("Select location, more locations were found");
-//                for (int i = 0; i < locationInfo.size(); i++) {
-//                    System.out.println(i + 1 + " " + locationInfo.get(i));
-//                }
-//                s = scanner.nextLine();
-            return APIService.getWeatherInfo(locations.get(Integer.parseInt(s) - 1).getAccuWeatherKey());
+//            fileService.updateDataInFile(weatherInfoFiveDays);
+            return List.of(actual);
 //            } else if (locationInfo.size() == 1) {
 //                return APIService.getWeatherInfo(locationInfo.get(0).getAccuWeatherKey());
 //            } else {

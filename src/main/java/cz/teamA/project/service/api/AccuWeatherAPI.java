@@ -54,7 +54,7 @@ public class AccuWeatherAPI {
     //API KEY vkládat přes proměnnou
     // použít key z parametrů
     public List<WeatherInfo> getWeatherInfo(int key) {
-        String urlString = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/124930?apikey=mA7XoDQGB5OTqyq0R2zHL87GkBynWE2c&details=true&metric=true";
+        String urlString = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/"+ key + "?apikey=mA7XoDQGB5OTqyq0R2zHL87GkBynWE2c&details=true&metric=true";
         try {
             HttpRequest request = HttpRequest.newBuilder(new URI(urlString)).GET().build();
             HttpClient client = HttpClient.newHttpClient();

@@ -43,6 +43,15 @@ public class WeatherInfo {
         this.date = date;
     }
 
+    public WeatherInfo(WeatherInfo weatherInfo, Location location ){
+        this.temperatureMin = weatherInfo.getTemperatureMin();
+        this.temperatureMax = weatherInfo.getTemperatureMax();
+        this.windDirection = weatherInfo.getWindDirection();
+        this.windSpeed = weatherInfo.getWindSpeed();
+        this.location = location;
+        this.date = weatherInfo.getDate();
+    }
+
     @Override
     public String toString() {
         return "WeatherInfo{" +
