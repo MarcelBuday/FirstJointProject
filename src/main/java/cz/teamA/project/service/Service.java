@@ -112,7 +112,8 @@ public class Service<T> {
 
                 }
             }
-            List<WeatherInfo> weatherInfoFiveDays = APIService.getWeatherInfo(locations.get(Integer.parseInt(s) - 1).getAccuWeatherKey());
+            final Location location = locations.get(Integer.parseInt(s) - 1);
+            List<WeatherInfo> weatherInfoFiveDays = APIService.getWeatherInfo(location);
             WeatherInfo actual = null;
             for (WeatherInfo weatherInfo : weatherInfoFiveDays) {
                 weatherInfo.setLocation(locations.get(Integer.parseInt(s) - 1));
@@ -156,11 +157,7 @@ public class Service<T> {
         return null;
     }
 
-    public void test(double lat, double lon) {
-        APIService.test(lat, lon);
-    }
-
-    public String enterNewCityNameForValidation() {
+       public String enterNewCityNameForValidation() {
         String cityProposal = scanner.nextLine();
         while (cityProposal.isEmpty()) {
             cityProposal = scanner.nextLine();

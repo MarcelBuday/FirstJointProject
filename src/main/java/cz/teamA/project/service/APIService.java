@@ -24,10 +24,12 @@ public class APIService {
         return accuWeatherAPI.getLocationInfo(location);
     }
 
-    public List<WeatherInfo> getWeatherInfo(int key) {
-        return accuWeatherAPI.getWeatherInfo(key);
+    public List<WeatherInfo> getWeatherInfo(Location location) {
+        final List<WeatherInfo> weatherInfo = accuWeatherAPI.getWeatherInfo(location.getAccuWeatherKey());
+        final List<WeatherInfo> weatherInfo1 = openWeatherAPI.getWeatherInfo(location.getLatitude(), location.getLongitude());
+        return null;
     }
-public void test (double lat, double lon){
-        openWeatherAPI.getWeatherInfo(lat,lon);
-}
+//public void test (double lat, double lon){
+//        openWeatherAPI.getWeatherInfo(lat,lon);
+//}
 }

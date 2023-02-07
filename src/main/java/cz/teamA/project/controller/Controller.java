@@ -54,9 +54,7 @@ public class Controller {
                 case "0":
                     System.exit(0);
                     break;
-                case "test":
-                    service.test(48.7172272,21.2496774);
-                    break;
+
                 default:
                     consoleUI.unknownChoice();
                     break;
